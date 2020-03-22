@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- {% block link %} -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- {% load staticfiles %} -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"> -->
+    <!-- {% endblock link %}
+    {% block styles %}{% endblock styles %} -->
+</head>
+<body>
+    <div class="container">
+        <!-- Header area start-->
+        <!-- {% block header %} -->
+        <header class="header-section-area">
+            <p>1</p>
+        </header>
+        <!-- {% endblock header %} -->
+        <!-- Header area End-->
+
+        
+        <!-- Nav area start-->
+        <!-- {% block nav %} -->
+        <nav class="nav-section-area">
+            <p>2</p>
+        </nav>
+        <!-- {% endblock nav %} -->
+        <!-- Nav area End-->
+        
+        <!-- Section area start-->
+        <!-- {% block content %} -->
+        <section class="section-area">
+            <p>3</p>
+        </section>
+        <!-- {% endblock content %} -->
+        <!-- Section area End-->
+
+        <!-- Article area start-->
+        <!-- {% block content %} -->
+        <article class="article-section-area">
+            <p>4</p>
+        </article>
+        <!-- {% endblock content %} -->
+        <!-- Article area End-->
+
+        <!-- Aside area start-->
+        <!-- {% block content %} -->
+        <aside class="aside-section-area">
+            <p>5</p>
+        </aside>
+        <!-- {% endblock content %} -->
+        <!-- Aside area End-->
+
+        <!-- Footer area start-->
+        <!-- {% block footer %} -->
+        <!-- {% include "footer.html" %} -->
+        <footer class="footer-section-area">
+            <p>6</p>
+        </footer>
+        <!-- {% endblock footer %} -->
+        <!-- Footer area End-->
+    </div>
+           
+        <!-- {% block pagination %}
+        {% endblock pagination %} -->
+</body>
+</html>

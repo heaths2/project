@@ -1,0 +1,159 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*---------------------------------------------------------------------------------------------------------------------------------+
+|
+|    Creation date: 2020-03-20
+|    Description: 
+|    Author: Gyo
+|    Version: 1.0
+|
++----------------------------------------------------------------------------------------------------------------------------------+
+
+    +---------+
+    |CSS INDEX|
+    +---------+
+
++----------------------------------------------------------------------------------+
+|   1. Theme Default CSS                                                           |
+|   1. Theme Default CSS                                                           |
+|   1. Theme Default CSS                                                           |
+|   1. Theme Default CSS                                                           |
+|   1. Theme Default CSS                                                           |
+|   1. Theme Default CSS                                                           |
+|   1. Theme Default CSS                                                           |
+|   1. Theme Default CSS                                                           |
+|   1. Theme Default CSS                                                           | 
++---------------------------------------------------------------------------------*/
+
+
+
+/*----------------------------------------*/
+/*  1.  Theme default CSS                 */
+/*----------------------------------------*/
+/* 매우 작은 기기들 (모바일폰, 768px 보다 작은) */
+/* 부트스트랩에서 이것은 기본이므로 미디어쿼리가 없습니다. */
+
+/* 작은 기기들 (태블릿, 768px 이상) */
+/* @media (min-width: @screen-sm-min) { ... } */
+
+/* 중간 기기들 (데스크탑, 992px 이상) */
+/* @media (min-width: @screen-md-min) { ... } */
+
+/* 큰 기기들 (큰 데스크탑, 1200px 이상) */
+/* @media (min-width: @screen-lg-min) { ... } */
+.container {
+    margin: 0 auto;
+    /* padding: 0; */
+    width: 100%;
+    height: 100vh;
+    background: #F6F8FA;
+    /* 그리드 구성 */
+    display: grid;
+    /* grid-template: 1fr 2fr 6fr 1fr / 1fr 4fr 4fr 1fr; */
+    /* grid-template: 1fr 2fr 6fr 1fr / 1fr 8fr 1fr; */
+    grid-template-columns: 1fr 8fr 1fr;
+    grid-template-rows: 1fr 2fr 6fr 1fr;
+    grid-auto-columns: minmax(100px auto);
+    grid-auto-rows: minmax(70px 70px);
+    /* grid-gap: 1rem; */
+    /* grid-template-areas:
+        "header header header header"
+        "nav nav nav nav"
+        "section article article aside"
+        "section article article aside"
+        "footer footer footer footer"; */
+}
+.header-section-area, .footer-section-area {
+    background:#00c292;
+}
+.section-area, .aside-section-area {
+    background: rgba(255, 0, 0, 0.5);
+    /* background: #00000000; */
+}
+.nav-section-area, .article-section-area {
+    background: rgba(255, 255, 0, 0.5);
+    /* background: #00000000; */
+}
+.header-section-area {
+    /* grid-area: header; */
+    grid-column: 1 / 5;
+    grid-row: 1 / 2;
+    /* z-index: 1; */
+}
+.nav-section-area {
+    /* grid-area: nav; */
+    grid-column: 1 / 5;
+    grid-row: 2 / 3;
+    /* z-index: 2; */
+}
+.section-area {
+    /* grid-area: section; */
+    grid-column: 1;
+    grid-row: 3 / 4;
+    /* z-index: 3; */
+}
+.article-section-area {
+    /* grid-area: article; */
+    grid-column: 2 / 4;
+    grid-row: 3 / 4;
+    /* z-index: 4; */
+}
+.aside-section-area {
+    /* grid-area: aside; */
+    grid-column: 4;
+    grid-row: 3 / 4;
+    /* z-index: 5; */
+}
+.footer-section-area {
+    /* grid-area: footer; */
+    grid-column: 1 / 5;
+    grid-row: 4;
+    /* z-index: 6; */
+}
