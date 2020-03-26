@@ -88,9 +88,9 @@ table {
 
 /* 큰 기기들 (큰 데스크탑, 1200px 이상) */
 /* @media (min-width: @screen-lg-min) { ... } */
-.container {
-    margin: 0 auto;
-    /* padding: 0; */
+#container {
+    margin: 0;
+    padding: 0;
     width: 100%;
     height: 100vh;
     background: #F6F8FA;
@@ -141,13 +141,13 @@ table {
 }
 .article-section-area {
     /* grid-area: article; */
-    grid-column: 2 / 4;
+    grid-column: 2 / 3;
     grid-row: 3 / 4;
     /* z-index: 4; */
 }
 .aside-section-area {
     /* grid-area: aside; */
-    grid-column: 4;
+    grid-column: 3;
     grid-row: 3 / 4;
     /* z-index: 5; */
 }
