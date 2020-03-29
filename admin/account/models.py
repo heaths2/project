@@ -8,6 +8,7 @@ from django.contrib.auth.models import (
 
 
 class CustomUserManager(BaseUserManager):
+
     def _create_user(self, email, username, password=None, **extra_fields):
         """
         Create and save a user with the given username, email, and password.
@@ -105,15 +106,15 @@ class User(AbstractBaseUser):
         (2, 'Female')
     )
 
-    gender = models.SmallIntegerField(choices=GENDER_CHOICES, default=0, max_length=1)
+    gender = models.SmallIntegerField(choices=GENDER_CHOICES, default=0)
 
     date_joined = models.DateTimeField(verbose_name='가입일', db_column='date_joined', auto_now_add=True, blank=False, null=False)
     last_login = models.DateTimeField(verbose_name='마지막 로그인', db_column='last_login', auto_now=True, blank=False, null=False)
 
-    is_active       = models.BooleanField(default=True, null=False, blank=False, verbose_name='활성화')
-    is_admin        = models.BooleanField(default=False, null=False, blank=False, verbose_name='관리자')
-    is_staff        = models.BooleanField(default=False, null=False, blank=False, verbose_name='직원')
-    is_superuser    = models.BooleanField(default=False, null=False, blank=False, verbose_name='슈퍼유저')
+    is_active = models.BooleanField(default=True, null=False, blank=False, verbose_name='활성화')
+    is_admin = models.BooleanField(default=False, null=False, blank=False, verbose_name='관리자')
+    is_staff = models.BooleanField(default=False, null=False, blank=False, verbose_name='직원')
+    is_superuser = models.BooleanField(default=False, null=False, blank=False, verbose_name='슈퍼유저')
 
     objects = CustomUserManager()
 
