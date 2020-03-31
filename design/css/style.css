@@ -127,18 +127,26 @@ table {
 }
 .nav-section-area {
     /* grid-area: nav; */
-    background: lavenderblush;
+    background: #f8f9fa;
     grid-column: 1 / 4;
     grid-row: 2 / 3;
     position: fixed;
-    top: 120px;
-    left: 50%;
+    width: 100%;
+    height: 120px;
+    top: 60px;
+    /* left: 50%; */
     /* width: 100%; */
     /* height: 0; */
     z-index: 9998;
     /* margin-top: -30px;
     margin-left: -25%; */
-    transform: translate(-140px, -50%);
+    /* transform: translate(-140px, -50%); */
+}
+nav > div { 
+    background: lightblue;
+    margin: 40px auto;
+    left: 50%;
+    transform: translate(-50%);
 }
 .section-area {
     /* grid-area: section; */
