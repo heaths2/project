@@ -101,8 +101,13 @@ WSGI_APPLICATION = 'admin.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': 'django',
+        # 'USER': 'root',
+        # 'PASSWORD': 'toor',
+        # 'HOST': '192.168.100.111',
+        # 'PORT': '3306'
         'OPTIONS': {
-            'read_default_file': '/project/mariadb.cnf',
+            'read_default_file': '/root/project/mariadb.cnf',
         },
     }
 }

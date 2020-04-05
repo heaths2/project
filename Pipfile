@@ -11,6 +11,7 @@ pymysql = "*"
 django-allow-cidr = "*"
 pillow = "*"
 djangorestframework = "*"
+djangorestframework-simplejwt = "*"
 
 [requires]
 python_version = "3.6"
