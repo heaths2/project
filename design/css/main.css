@@ -99,7 +99,7 @@ iframe {
 .container-table100 {
   width: 100%;
   min-height: 100vh;
-  background: #d1d1d1;
+  background: #fff;
 
   display: -webkit-box;
   display: -webkit-flex;
@@ -155,7 +155,7 @@ th, td {
   font-family: Montserrat-Regular;
   font-size: 14px;
   color: #808080;
-  line-height: 1.4;
+  line-height: 1.4; 
 }
 
 .table100.ver1 th {
@@ -165,7 +165,7 @@ th, td {
   line-height: 1.4;
   text-transform: uppercase;
 
-  background-color: #36304a;
+  background-color: #00c292;
 }
 
 .table100.ver1 .row100:hover {
@@ -177,7 +177,7 @@ th, td {
 }
 
 .table100.ver1 .hov-column-head-ver1 {
-  background-color: #484848 !important;
+  background-color: #08cf9e !important;
 }
 
 .table100.ver1 .row100 td:hover {
@@ -243,7 +243,7 @@ th, td {
   line-height: 1.4;
   text-transform: uppercase;
 
-  background-color: #333333;
+  background-color: #00c292;
 }
 
 .table100.ver2 .row100:hover td {
@@ -285,7 +285,7 @@ th, td {
   line-height: 1.4;
   text-transform: uppercase;
 
-  background-color: #6c7ae0;
+  background-color: #00c292;
 }
 
 .table100.ver3 .row100:hover td {
