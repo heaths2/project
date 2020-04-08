@@ -9,6 +9,7 @@ router.register(r'comment', views.CommentViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('post/list', views.list),
 ]
 # urlpatterns = [
 #     path('<page_slug>-<page_id>/', include([

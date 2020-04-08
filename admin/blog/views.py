@@ -5,6 +5,9 @@ from .models import Post, Comment
 from .serializers import PostSerializer, CommentSerializer
 
 
+def list(requests):
+    return render(requests, 'blog/list.html')
+
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
