@@ -82,7 +82,7 @@ class User(AbstractBaseUser):
         },
     )
 
-    date_of_birth = models.DateTimeField(verbose_name='생년월일', db_column='date_of_birth', auto_now_add=True, blank=False, null=False)
+    date_of_birth = models.DateTimeField(verbose_name='생년월일', db_column='date_of_birth', default='1999-01-01 00:00:00', blank=False, null=False)
 
     GENDER_CHOICES = (
         (0, 'Not to selected'),
@@ -110,6 +110,9 @@ class User(AbstractBaseUser):
 
     def has_perm(self, perm, obj=None):
         return True
+
+    def has_module_perms(self, app_label):
+        return self.is_admin
 
     class Meta:
         verbose_name = _('user')

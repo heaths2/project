@@ -2,9 +2,11 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from support.models import BaseModel
+from account.models import User
 
 
 class Post(BaseModel):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='작성자', db_column='author')
     title = models.CharField(db_column='title', verbose_name='제목', max_length=255, blank=False, null=False)
     content = models.TextField(db_column='content', verbose_name='내용', blank=True, null=True)
     # 저장경로, MEDIA_ROOT/blog/2017/05/10/xxxx.jpg 경로에 저장
@@ -24,7 +26,7 @@ class Post(BaseModel):
 
 
 class Comment(BaseModel):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name='게시글', db_column='post')
     content = models.TextField(db_column='content', verbose_name='내용', blank=True, null=True)
 
     class Meta:
