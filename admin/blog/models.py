@@ -26,8 +26,12 @@ class Post(BaseModel):
 
 
 class Comment(BaseModel):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='작성자', db_column='author')
     post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name='게시글', db_column='post')
     content = models.TextField(db_column='content', verbose_name='내용', blank=True, null=True)
+
+    def __str__(self):
+        return '%s. %s' % (self.id, self.post)
 
     class Meta:
         db_table = 'project_blog_comment'
