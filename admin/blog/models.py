@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from support.models import BaseModel
-from account.models import User
+from user.models import User
 
 
 class Post(BaseModel):
@@ -20,7 +20,7 @@ class Post(BaseModel):
         return self.title
 
     class Meta:
-        db_table = 'project_blog'
+        db_table = 'g_blog'
         verbose_name = '블로그'
         verbose_name_plural = '블로그'
 
@@ -34,6 +34,6 @@ class Comment(BaseModel):
         return '%s. %s' % (self.id, self.post)
 
     class Meta:
-        db_table = 'project_blog_comment'
+        db_table = 'g_comment'
         verbose_name = '덧글'
         verbose_name_plural = '덧글'

@@ -12,6 +12,10 @@ django-allow-cidr = "*"
 pillow = "*"
 djangorestframework = "*"
 djangorestframework-simplejwt = "*"
+django-rest-framework-jwt = "*"
+djangorestframework-jwt = "*"
+django-rest-auth = "*"
+django-allauth = "*"
 
 [requires]
 python_version = "3.6"

@@ -6,14 +6,14 @@ Login
 
 {% block content %}
 
-    <h1>Welcome!</h1>
-    <hr>
-    Welcome! You can login here!
-    <h1>{{ name }}</h1>
-    <form method="POST" action="">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-light" type="submit" name="submit">login</button>
-    </form>
+<h1>Welcome!</h1>
+<hr>
+Welcome! You can login here!
+<h1>{{ name }}</h1>
+<form method="POST" action="">
+    {% csrf_token %}
+
+    <button class="btn btn-light" type="submit" name="submit">login</button>
+</form>
 
 {% endblock content %}
