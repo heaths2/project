@@ -6,6 +6,7 @@ from .models import Post, Comment
 from .serializers import PostSerializer, CommentSerializer
 
 
+<<<<<<< HEAD
 class PostListView(ListView):
     model = Post
     paginate_by = 10
@@ -13,6 +14,10 @@ class PostListView(ListView):
     class Meta:
         get_latest_by = ['create_at']
 
+=======
+def list(requests):
+    return render(requests, 'blog/list.html')
+>>>>>>> d4a820d54a6a253e97bdaa67545bf699152a3d38
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
