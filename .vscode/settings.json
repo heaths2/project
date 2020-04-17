@@ -1,11 +1,16 @@
 {
-    "python.pythonPath": "C:\\ProgramData\\Anaconda3\\python.exe",    
+    "python.pythonPath": "C:\\ProgramData\\Anaconda3\\python.exe",
     // "team.showWelcomeMessage": false,
     "editor.formatOnSave": true,
     "python.linting.pycodestyleEnabled": true,
     "python.linting.pylintPath": "pylint",
-    "python.linting.pylintArgs": ["--load-plugins", "pylint_django"],
+    "python.linting.pylintArgs": [
+        "--load-plugins",
+        "pylint_django"
+    ],
     "python.linting.pylintEnabled": true,
-    "python.venvPath": "root/.local/share/virtualenvs/project-OdyMjCZJ/bin/python3.6",
-    "python.linting.pycodestyleArgs": ["--ignore=E501"],
+    "python.venvPath": "C:\\Users\\S2\\.virtualenvs\\project-M-UwhX0S\\Scripts\\python.exe",
+    "python.linting.pycodestyleArgs": [
+        "--ignore=E501"
+    ],
 }

@@ -12,6 +12,7 @@ django-allow-cidr = "*"
 pillow = "*"
 djangorestframework = "*"
 djangorestframework-simplejwt = "*"
+django-summernote = "*"
 
 [requires]
-python_version = "3.6"
+python_version = "3.7"
