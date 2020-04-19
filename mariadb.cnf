@@ -1,7 +1,7 @@
 [client]
 DATABASE = 'django'
-USER = 'root'
-PASSWORD = 'toor'
+USER = 'python'
+PASSWORD = 'python'
 DEFAULT-CHARACTER-SET = UTF8
-HOST = '192.168.100.111'
-PORT = '3306'
+HOST = '124.56.173.21'
+PORT = '15099'
