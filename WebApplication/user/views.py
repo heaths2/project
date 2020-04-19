@@ -33,8 +33,7 @@ class LoginView(LoginView):
 
     def form_valid(self, form):
         self.request.session['user'] = form.data.get('email')
-
-        return super().form_valid(form)
+        return super().form_valid(LoginForm)
 
 
 class LogoutView(LogoutView):
