@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['*']
 # CIDR
 ALLOWED_CIDR_NETS = [
     '192.168.100.0/24',
+    '*',
 ]
 
 # Application definition
