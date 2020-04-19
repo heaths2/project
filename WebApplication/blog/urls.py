@@ -8,9 +8,10 @@ router = routers.DefaultRouter()
 router.register(r'post', views.PostViewSet)
 router.register(r'comment', views.CommentViewSet)
 
+app_name = 'blog'
 urlpatterns = [
     path('', include(router.urls)),
-    path('blog/list', PostListView.as_view())
+    path('list/', PostListView.as_view(), name='home')
 ]
 # urlpatterns = [
 #     path('<page_slug>-<page_id>/', include([
