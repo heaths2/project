@@ -11,7 +11,7 @@ router.register(r'comment', views.CommentViewSet)
 app_name = 'blog'
 urlpatterns = [
     path('', include(router.urls)),
-    path('list/', PostListView.as_view(), name='home')
+    path('list/', PostListView.as_view(), name='list')
 ]
 # urlpatterns = [
 #     path('<page_slug>-<page_id>/', include([
