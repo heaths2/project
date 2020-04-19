@@ -33,7 +33,6 @@ ALLOWED_HOSTS = ['*']
 # CIDR
 ALLOWED_CIDR_NETS = [
     '192.168.100.0/24',
-    '*',
 ]
 
 # Application definition
@@ -179,7 +178,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-    ]    
+    ]
 }
 
 SIMPLE_JWT = {
@@ -232,4 +231,3 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = 'user.User'
-
