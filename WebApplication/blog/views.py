@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import ListView
+from django.views.generic.edit import (
+    FormView, CreateView, UpdateView, DeleteView
+)
 from rest_framework import viewsets, permissions
 
 from .models import Post, Comment
@@ -12,6 +15,26 @@ class PostListView(ListView):
 
     class Meta:
         get_latest_by = ['create_at']
+
+
+class PostCreateView(CreateView):
+    model = Post
+    fields = ['author', 'title', 'content', 'image', 'files']
+    template_name = ''
+    success_url = '/'
+
+
+class PostUpdateView(UpdateView):
+    model = Post
+    fields = ['author', 'title', 'content', 'image', 'files']
+    template_name = ''
+    template_name_suffix = '_update_form'
+
+
+class PostDeleteView(DeleteView):
+    model = Post
+    # success_url = reverse_lazy('author-list')
+    success_url = '/'
 
 
 class PostViewSet(viewsets.ModelViewSet):
