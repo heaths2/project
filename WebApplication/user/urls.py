@@ -1,5 +1,4 @@
 from django.urls import include, path
-from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework import routers
 
 from .views import RegisterView, LoginView, LogoutView
@@ -11,9 +10,8 @@ router.register(r'account', views.AccountViewSet)
 urlpatterns = [
     # path('login/', LoginView.as_view(template_name='account/login.html'), name="login"),/
     path('login/', LoginView.as_view(template_name='account/login.html'), name="login"),
-    path('rest-auth/', include('rest_auth.urls')),
-    path('rest-auth/registration/', include('rest_auth.registration.urls')),
-    path('api-token-auth/', obtain_jwt_token),
+    # path('rest-auth/', include('rest_auth.urls')),
+    # path('rest-auth/registration/', include('rest_auth.registration.urls')),
     # path('', include('user.urls')),
 ]
 # urlpatterns = [
