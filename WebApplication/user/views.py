@@ -15,7 +15,7 @@ class RegisterView(CreateView):
     template_name = 'account/register.html'
     success_url = '/'
     # success_url = reverse_lazy('login')
-    
+
     def form_valid(self, form):
         customuser = User(
             email=form.data.get('email'),
@@ -28,12 +28,12 @@ class RegisterView(CreateView):
 
 class LoginView(LoginView):
     form_class = LoginForm
-    template_name = 'account/index.html'
+    template_name = 'account/Login19.html'
     success_url = '/'
 
     def form_valid(self, form):
         self.request.session['user'] = form.data.get('email')
-        
+
         return super().form_valid(form)
 
 
