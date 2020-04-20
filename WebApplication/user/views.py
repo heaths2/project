@@ -29,7 +29,7 @@ class RegisterView(CreateView):
 class LoginView(LoginView):
     form_class = LoginForm
     template_name = 'account/Login19.html'
-    success_url = '/'
+    context_object_name = 'forms'
 
     def form_valid(self, form):
         self.request.session['user'] = form.data.get('email')
