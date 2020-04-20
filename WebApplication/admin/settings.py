@@ -231,3 +231,8 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = 'user.User'
+
+
+LOGIN_URL = 'blog/list'
+LOGIN_REDIRECT_URL = 'account/login'
+LOGOUT_REDIRECT_URL = None
