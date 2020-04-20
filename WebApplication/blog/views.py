@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from django.views.generic.edit import (
     FormView, CreateView, UpdateView, DeleteView
@@ -9,7 +10,7 @@ from .models import Post, Comment
 from .serializers import PostSerializer, CommentSerializer
 
 
-class PostListView(ListView):
+class PostListView(LoginRequiredMixin, ListView):
     model = Post
     paginate_by = 10
 
@@ -17,21 +18,21 @@ class PostListView(ListView):
         get_latest_by = ['create_at']
 
 
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['author', 'title', 'content', 'image', 'files']
     template_name = ''
     success_url = '/'
 
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
     fields = ['author', 'title', 'content', 'image', 'files']
     template_name = ''
     template_name_suffix = '_update_form'
 
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     # success_url = reverse_lazy('author-list')
     success_url = '/'
