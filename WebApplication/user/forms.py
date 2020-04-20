@@ -80,7 +80,9 @@ class LoginForm(forms.ModelForm):
                              },
                              )
     password = forms.CharField(label='비밀번호',
-                               widget=forms.PasswordInput,
+                               widget=forms.PasswordInput(attrs={
+                                   'class': 'wrap-input100 rs1 validate-input', 'placeholder': 'Password', 'data-validate': 'Password is required',
+                               }),
                                error_messages={
                                    'required': '비밀번호를 입력하시오.'
                                },
@@ -89,7 +91,7 @@ class LoginForm(forms.ModelForm):
     class Meta:
         model = User
         fields = [
-            'email', 'username', 'mobile_number', 'gender'
+            'email', 'password'
         ]
 
     def clean(self):
