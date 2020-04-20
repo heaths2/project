@@ -90,9 +90,23 @@ class LoginForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = [
-            'email', 'password'
-        ]
+        fields = ['email', 'password']
+        labels = {
+            'email': '이메일',
+            'password': '비밀번호',
+        }
+        error_messages = {
+            'email': {
+                'required': _('이메일 주소를 입력하시오.'),
+            },
+            'password': {
+                'required': _('비밀번호를 입력하시오.'),
+            },
+        }
+        widgets = {
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'password': forms.PasswordInput(attrs={'class': 'form-control'}),
+        }
 
     def clean(self):
         cleand_data = super().clean()
