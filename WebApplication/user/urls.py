@@ -9,7 +9,7 @@ router.register(r'account', views.AccountViewSet)
 
 urlpatterns = [
     # path('login/', LoginView.as_view(template_name='account/login.html'), name="login"),/
-    path('login/', LoginView.as_view(template_name='account/Login19.html'), name="login"),
+    path('login/', LoginView.as_view(), name="login"),
     # path('rest-auth/', include('rest_auth.urls')),
     # path('rest-auth/registration/', include('rest_auth.registration.urls')),
     # path('', include('user.urls')),

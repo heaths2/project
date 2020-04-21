@@ -28,7 +28,7 @@ class RegisterView(CreateView):
 
 class LoginView(LoginView):
     form_class = LoginForm
-    template_name = 'account/Login19.html'
+    template_name = 'account/sample.html'
     context_object_name = 'forms'
 
     def form_valid(self, form):
