@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/Login.css' %}" />
 </head>
 
 <body>
@@ -12,8 +16,9 @@
         <h1>Login</h1>
         <input type="email" name="email" placeholder="Email">
         <input type="password" name="password" placeholder="Password">
-        <input type="submit" name="submit" value="Login">
+        <button type="button" class="btn btn-light">login</button>
     </form>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 </body>
 
 </html>
