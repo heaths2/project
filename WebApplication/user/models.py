@@ -51,7 +51,7 @@ class CustomUserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    email = models.EmailField(verbose_name='이메일', db_column='email', max_length=254, unique=True, blank=False, null=False,
+    email = models.EmailField(verbose_name='이메일', db_column='email', max_length=64, unique=True, blank=False, null=False,
         validators=[
             RegexValidator(
                 # r'@4anytech.co.kr$',
@@ -61,7 +61,7 @@ class User(AbstractBaseUser):
         ]
     )
 
-    username = models.CharField(verbose_name='이름', db_column='username', max_length=8, unique=True, blank=False, null=False,
+    username = models.CharField(verbose_name='이름', db_column='username', max_length=32, unique=True, blank=False, null=False,
         validators=[
             RegexValidator(
                 regex=r'^[가-힣]+$',
@@ -85,9 +85,9 @@ class User(AbstractBaseUser):
     date_of_birth = models.DateTimeField(verbose_name='생년월일', db_column='date_of_birth', default='1999-01-01 00:00:00', blank=False, null=False)
 
     GENDER_CHOICES = (
-        (0, 'Not to selected'),
-        (1, 'Male'),
-        (2, 'Female')
+        (0, '선택하지 않음'),
+        (1, '남성'),
+        (2, '여성'),
     )
 
     gender = models.SmallIntegerField(choices=GENDER_CHOICES, default=0)
