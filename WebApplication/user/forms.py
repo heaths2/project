@@ -15,6 +15,15 @@ class RegisterForm(forms.ModelForm):
             'required' : '생년월일을 입력하시오.'
         },
     )
+    password2 = forms.CharField(label='비밀번호 확인',
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control', 'name': 'password2', 'placeholder': 'Password Confirm', 'type': 'password',
+        }),
+        required=True,
+        error_messages={
+            'required' : '생년월일을 입력하시오.'
+        },
+    )
 
     class Meta:
         model = User
@@ -58,7 +67,7 @@ class RegisterForm(forms.ModelForm):
                 'class': 'form-control', 'name': 'username', 'placeholder': 'Username',
             }),
             'mobile_number': forms.TextInput(attrs={
-                'class': 'form-control', 'name': 'mobile_number', 'placeholder': 'Phone Number', 'type': 'tel', 'pattern': '[0-9]{3}-[0-9]{3}-[0-9]{3}'
+                'class': 'form-control', 'name': 'mobile_number', 'placeholder': '연락처 : 010-1234-5678', 'type': 'tel',
             }),
             'date_of_birth': forms.SelectDateWidget(attrs={
                 'class': 'form-control', 'name': 'date_of_birth', 'placeholder': 'Date Of Birth', 'type': 'date', 'value': '1990-01-01'
@@ -66,18 +75,15 @@ class RegisterForm(forms.ModelForm):
             'gender': forms.Select(attrs={
                 'class': 'form-control', 'name': 'gender', 'placeholder': 'Gender',
             }),
-            'password1': forms.PasswordInput(attrs={
+            'password': forms.PasswordInput(attrs={
                 'class': 'form-control', 'name': 'password', 'placeholder': 'Password',
-            }),
-            'password2': forms.PasswordInput(attrs={
-                'class': 'form-control', 'name': 'password2', 'placeholder': 'Password Confirm',
             }),
         }
 
     def clean_password2(self):
-        password1 = self.cleaned_data.get('password1')
+        password = self.cleaned_data.get('password')
         password2 = self.cleaned_data.get('password2')
-        if password1 and password2 and password1 != password2:
+        if password and password2 and password != password2:
             raise forms.ValidationError('패스워드가 일치하지 않습니다.')
         return password2
 
@@ -121,18 +127,24 @@ class LoginForm(forms.ModelForm):
             }),
         }
 
-    def clean(self):
-        cleand_data = super().clean()
-        email = cleand_data.get('email')
-        password = cleand_data.get('password')
+    def clean_password2(self):
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError('패스워드가 일치하지 않습니다.')
+        return password2
 
-        if email and password:
-            try:
-                fcuser = Fcuser.objects.get(email=email)
-            except Fcuser.DoesNotExist:
-                self.add_error('email', '입력 값이 옳바르지 않습니다.')
-            if not check_password(password, fcuser.password):
-                self.add_error('password', '입력 값이 옳바르지 않습니다.')
+    def clean_data(self):
+        email = self.cleand_data.get('email')
+        password = self.cleand_data.get('password')
+
+        # if email and password:
+        #     try:
+        #         customuser = User.objects.get(email=email)
+        #     except User.DoesNotExist:
+        #         self.add_error('email', '입력 값이 옳바르지 않습니다.')
+        #     if not password(password, User.objects.get(password=password)):
+        #         self.add_error('password', '입력 값이 옳바르지 않습니다.')
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
