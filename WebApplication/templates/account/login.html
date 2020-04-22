@@ -1,19 +1,18 @@
-{% extends "base.html" %}
+{% extends "accountbase.html" %}
 
 {% block title %}
-Login
+로그인
 {% endblock title %}
 
 {% block content %}
 
-<h1>Welcome!</h1>
-<hr>
-Welcome! You can login here!
-<h1>{{ name }}</h1>
-<form method="POST" action="">
+<form class="box" method="POST" action="{% url 'user:Login' %}">
     {% csrf_token %}
-
-    <button class="btn btn-light" type="submit" name="submit">login</button>
+    <h1>로그인</h1>
+    {{ form.email }}
+    {{ form.password }}
+    {{ errors }}
+    <button type="button" class="btn btn-success">로그인</button>
 </form>
 
 {% endblock content %}
