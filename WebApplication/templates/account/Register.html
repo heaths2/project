@@ -1,0 +1,22 @@
+{% extends "accountbase.html" %}
+
+{% block title %}
+회원가입
+{% endblock title %}
+
+{% block content %}
+
+<form class="box" method="POST" action="{% url 'user:Login' %}">
+    {% csrf_token %}
+    <h1>회원가입</h1>
+    {{ form.email }}
+    {{ form.username }}
+    {{ form.mobile_number }}
+    {{ form.date_of_birth }}
+    {{ form.gender }}
+    {{ form.password }}
+    {{ errors }}
+    <button type="button" class="btn btn-success">가입하기</button>
+</form>
+
+{% endblock content %}
