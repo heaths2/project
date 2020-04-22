@@ -5,88 +5,97 @@ from .models import User
 
 
 class RegisterForm(forms.ModelForm):
-    email = forms.EmailField(label='이메일', max_length=64,
-                             widget=forms.EmailInput,
-                             error_messages={
-                                 'required': '이메일 주소를 입력하시오.'
-                             },
-                             )
-    username = forms.CharField(label='이름', max_length=8, min_length=2,
-                               widget=forms.TextInput,
-                               error_messages={
-                                   'required': '이름을 입력하시오.'
-                               },
-                               )
-    password1 = forms.CharField(label='비밀번호', max_length=64,
-                                widget=forms.PasswordInput,
-                                error_messages={
-                                    'required': '비밀번호를 입력하시오.'
-                                },
-                                )
-    password2 = forms.CharField(label='비밀번호 확인', max_length=64,
-                                widget=forms.PasswordInput,
-                                error_messages={
-                                    'required': '비밀번호를 확인하시오.'
-                                },
-                                )
-    mobile_number = forms.CharField(label='연락처', min_length=13, max_length=13,
-                                    widget=forms.TextInput,
-                                    required=True,
-                                    initial=None,
-                                    help_text=('ex)010-1234-5678'),
-                                    error_messages={
-                                        'required': '연락처를 입력하시오.'
-                                    },
-                                    )
-    # date_of_birth = forms.DateField(label='생년월일',
-    #     widget=forms.DateInput(),
-    #     required=True,
-    #     initial= {'date_of_birth':'1970/01/01'},
-    #     error_messages={
-    #         'required' : '생년월일을 입력하시오.'
-    #     },
-    # )
-    GENDER_CHOICES = (
-        (1, _('Male')),
-        (2, _('Female'))
+    date_of_birth = forms.DateField(label='생년월일',
+        input_formats=['%Y/%m/%d %H:%M'],
+        widget=forms.DateInput(attrs={
+            'class': 'form-control', 'name': 'date_of_birth', 'placeholder': 'Date Of Birth', 'type': 'date', 'value': '1990-01-01'
+        }),
+        required=True,
+        error_messages={
+            'required' : '생년월일을 입력하시오.'
+        },
     )
-    gender = forms.ChoiceField(label='성별',
-                               choices=GENDER_CHOICES,
-                               widget=forms.Select(),
-                               required=True,
-                               initial=None,
-                               error_messages={
-                                   'required': '성별을 입력하시오.'
-                               },
-                               )
 
     class Meta:
         model = User
         fields = [
-            'email', 'username', 'mobile_number', 'gender'
+            'email', 'username', 'mobile_number', 'date_of_birth', 'gender', 'password',
         ]
+        labels = {
+            'email': '이메일',
+            'username': '이름',
+            'mobile_number': '휴대폰',
+            'date_of_birth': '생년월일',
+            'gender': '성별',
+            'password': '비밀번호',
+            'password2': '비밀번호 확인',
+        }
+        error_messages = {
+            'email': {
+                'required': _('이메일 주소를 입력하시오.'),
+            },
+            'username': {
+                'required': _('이름을 입력하시오.'),
+            },
+            'mobile_number': {
+                'required': _('휴대폰번호를 입력하시오.'),
+            },
+            'gender': {
+                'required': _('성별을 입력하시오.'),
+            },
+            'password': {
+                'required': _('비밀번호를 입력하시오.'),
+            },
+            'password2': {
+                'required': _('비밀번호를 확인하시오.'),
+            },
+        }
+        widgets = {
+            'email': forms.EmailInput(attrs={
+                'class': 'form-control', 'name': 'email', 'placeholder': 'Email',
+            }),
+            'username': forms.TextInput(attrs={
+                'class': 'form-control', 'name': 'username', 'placeholder': 'Username',
+            }),
+            'mobile_number': forms.TextInput(attrs={
+                'class': 'form-control', 'name': 'mobile_number', 'placeholder': 'Phone Number', 'type': 'tel', 'pattern': '[0-9]{3}-[0-9]{3}-[0-9]{3}'
+            }),
+            'date_of_birth': forms.SelectDateWidget(attrs={
+                'class': 'form-control', 'name': 'date_of_birth', 'placeholder': 'Date Of Birth', 'type': 'date', 'value': '1990-01-01'
+            }),
+            'gender': forms.Select(attrs={
+                'class': 'form-control', 'name': 'gender', 'placeholder': 'Gender',
+            }),
+            'password1': forms.PasswordInput(attrs={
+                'class': 'form-control', 'name': 'password', 'placeholder': 'Password',
+            }),
+            'password2': forms.PasswordInput(attrs={
+                'class': 'form-control', 'name': 'password2', 'placeholder': 'Password Confirm',
+            }),
+        }
 
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError('패스워드가 일치하지 않습니다.')
+        return password2
 
 
 class LoginForm(forms.ModelForm):
-    email = forms.EmailField(label='이메일', max_length=64,
-                             error_messages={
-                                 'required': '이메일 주소를 입력하시오.'
-                             },
-                             )
-    password = forms.CharField(label='비밀번호',
-                               widget=forms.PasswordInput(attrs={
-                                   'class': 'wrap-input100 rs1 validate-input', 'placeholder': 'Password', 'data-validate': 'Password is required',
-                               }),
-                               error_messages={
-                                   'required': '비밀번호를 입력하시오.'
-                               },
-                               )
+    # email = forms.EmailField(label='이메일', max_length=64,
+    #                          error_messages={
+    #                              'required': '이메일 주소를 입력하시오.'
+    #                          },
+    #                          )
+    # password = forms.CharField(label='비밀번호',
+    #                            widget=forms.PasswordInput(attrs={
+    #                                'class': 'wrap-input100 rs1 validate-input', 'placeholder': 'Password', 'data-validate': 'Password is required',
+    #                            }),
+    #                            error_messages={
+    #                                'required': '비밀번호를 입력하시오.'
+    #                            },
+    #                            )
 
     class Meta:
         model = User
@@ -104,8 +113,12 @@ class LoginForm(forms.ModelForm):
             },
         }
         widgets = {
-            'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            'password': forms.PasswordInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={
+                'class': 'form-control', 'name': 'email', 'placeholder': 'Email',
+            }),
+            'password': forms.PasswordInput(attrs={
+                'class': 'form-control', 'name': 'password', 'placeholder': 'Password',
+            }),
         }
 
     def clean(self):
