@@ -232,7 +232,7 @@ REST_FRAMEWORK = {
 
 AUTH_USER_MODEL = 'user.User'
 
-
-LOGIN_URL = 'blog/list'
-LOGIN_REDIRECT_URL = 'account/login'
+LOGIN_URL = '/accounts/login/'
+# LOGIN_REDIRECT_URL = 'blog/list'
+LOGIN_REDIRECT_URL = '/admin'
 LOGOUT_REDIRECT_URL = None
