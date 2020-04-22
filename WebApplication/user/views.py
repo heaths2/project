@@ -12,17 +12,22 @@ from .models import User
 
 class RegisterView(CreateView):
     form_class = RegisterForm
-    template_name = 'account/register.html'
+    template_name = 'account/Register.html'
     success_url = 'account/Login'
     # success_url = reverse_lazy('login')
 
     def form_valid(self, form):
         customuser = User(
             email=form.data.get('email'),
+            username=form.data.get('username'),
+            mobile_number=form.data.get('mobile_number'),
+            date_of_birth=form.data.get('date_of_birth'),
+            gender=form.data.get('gender'),
             password=make_password(form.data.get('password')),
             is_active=True,
         )
         customuser.save()
+
         return super().form_valid(form)
 
 
@@ -33,7 +38,7 @@ class LoginView(LoginView):
 
     def form_valid(self, form):
         self.request.session['user'] = form.data.get('email')
-        return super().form_valid(LoginForm)
+        return super().form_valid(form)
 
 
 class LogoutView(LogoutView):
