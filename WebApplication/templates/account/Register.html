@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<form class="box" method="POST" action="{% url 'user:Login' %}">
+<form class="box" method="POST" action="{% url 'user:SignUp' %}">
     {% csrf_token %}
     <h1>회원가입</h1>
     {{ form.email }}
@@ -15,8 +15,8 @@
     {{ form.date_of_birth }}
     {{ form.gender }}
     {{ form.password }}
-    {{ errors }}
-    <button type="button" class="btn btn-success">가입하기</button>
+    {{ form.password2 }}
+    <button type="submit" class="btn btn-success">가입하기</button>
 </form>
 
 {% endblock content %}
