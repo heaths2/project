@@ -13,7 +13,7 @@ from .models import User
 class RegisterView(CreateView):
     form_class = RegisterForm
     template_name = 'account/register.html'
-    success_url = '/'
+    success_url = 'account/Login'
     # success_url = reverse_lazy('login')
 
     def form_valid(self, form):
@@ -28,8 +28,8 @@ class RegisterView(CreateView):
 
 class LoginView(LoginView):
     form_class = LoginForm
-    template_name = 'account/sample.html'
-    context_object_name = 'forms'
+    template_name = 'account/Login.html'
+    # context_object_name = 'forms'
 
     def form_valid(self, form):
         self.request.session['user'] = form.data.get('email')
