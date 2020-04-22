@@ -33,7 +33,6 @@ class Migration(migrations.Migration):
                 'verbose_name': 'user',
                 'verbose_name_plural': 'user',
                 'db_table': 'g_account_custom_user',
-                'db_table': 'account_custom_user',
             },
         ),
     ]
