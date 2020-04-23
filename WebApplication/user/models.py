@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import PermissionsMixin
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from django.core.validators import RegexValidator
@@ -50,7 +51,7 @@ class CustomUserManager(BaseUserManager):
         return self._create_user(email, username, password, **extra_fields)
 
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(verbose_name='이메일', db_column='email', max_length=64, unique=True, blank=False, null=False,
         validators=[
             RegexValidator(
@@ -77,9 +78,6 @@ class User(AbstractBaseUser):
                 message=_('휴대전화 번호를 입력하시오.'),
             ),
         ],
-        error_messages={
-            'unique': _("A user with that username already exists."),
-        },
     )
 
     date_of_birth = models.DateTimeField(verbose_name='생년월일', db_column='date_of_birth', default='1999-01-01 00:00:00', blank=False, null=False)
@@ -109,10 +107,21 @@ class User(AbstractBaseUser):
         return self.email + ", " + self.username
 
     def has_perm(self, perm, obj=None):
+        "Does the user have a specific permission?"
+        # Simplest possible answer: Yes, always
         return True
 
     def has_module_perms(self, app_label):
-        return self.is_admin
+        "Does the user have permissions to view the app `app_label`?"
+        # Simplest possible answer: Yes, always
+        return True
+
+    # @property
+    # def is_staff(self):
+    #     "Is the user a member of staff?"
+    #     # Simplest possible answer: All admins are staff
+    #     # return self.is_admin
+    #     return True
 
     class Meta:
         verbose_name = _('user')
