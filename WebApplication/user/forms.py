@@ -5,8 +5,8 @@ from .models import User
 
 
 class RegisterForm(forms.ModelForm):
-    date_of_birth = forms.DateField(label='생년월일',
-        input_formats=['%Y/%m/%d %H:%M'],
+    date_of_birth = forms.DateTimeField(label='생년월일',
+        # input_formats=['%Y/%m/%d %h:%m'],
         widget=forms.DateInput(attrs={
             'class': 'form-control', 'name': 'date_of_birth', 'placeholder': 'Date Of Birth', 'type': 'date', 'value': '1990-01-01'
         }),
@@ -21,7 +21,7 @@ class RegisterForm(forms.ModelForm):
         }),
         required=True,
         error_messages={
-            'required' : '생년월일을 입력하시오.'
+            'required' : '패스워드를 확인 하시오.'
         },
     )
 
@@ -37,7 +37,6 @@ class RegisterForm(forms.ModelForm):
             'date_of_birth': '생년월일',
             'gender': '성별',
             'password': '비밀번호',
-            'password2': '비밀번호 확인',
         }
         error_messages = {
             'email': {
@@ -54,9 +53,6 @@ class RegisterForm(forms.ModelForm):
             },
             'password': {
                 'required': _('비밀번호를 입력하시오.'),
-            },
-            'password2': {
-                'required': _('비밀번호를 확인하시오.'),
             },
         }
         widgets = {
@@ -89,19 +85,6 @@ class RegisterForm(forms.ModelForm):
 
 
 class LoginForm(forms.ModelForm):
-    # email = forms.EmailField(label='이메일', max_length=64,
-    #                          error_messages={
-    #                              'required': '이메일 주소를 입력하시오.'
-    #                          },
-    #                          )
-    # password = forms.CharField(label='비밀번호',
-    #                            widget=forms.PasswordInput(attrs={
-    #                                'class': 'wrap-input100 rs1 validate-input', 'placeholder': 'Password', 'data-validate': 'Password is required',
-    #                            }),
-    #                            error_messages={
-    #                                'required': '비밀번호를 입력하시오.'
-    #                            },
-    #                            )
 
     class Meta:
         model = User
@@ -120,31 +103,30 @@ class LoginForm(forms.ModelForm):
         }
         widgets = {
             'email': forms.EmailInput(attrs={
-                'class': 'form-control', 'name': 'email', 'placeholder': 'Email',
+                'class': 'form-control',
+                'name': 'email',
+                'placeholder': 'Email',
+                'required': 'True',
             }),
             'password': forms.PasswordInput(attrs={
-                'class': 'form-control', 'name': 'password', 'placeholder': 'Password',
+                'class': 'form-control',
+                'name': 'password',
+                'placeholder': 'Password',
+                'required': 'True',
             }),
         }
 
-    def clean_password2(self):
-        password1 = self.cleaned_data.get('password1')
-        password2 = self.cleaned_data.get('password2')
-        if password1 and password2 and password1 != password2:
-            raise forms.ValidationError('패스워드가 일치하지 않습니다.')
-        return password2
-
-    def clean_data(self):
+    def clean_login(self):
         email = self.cleand_data.get('email')
         password = self.cleand_data.get('password')
 
-        # if email and password:
-        #     try:
-        #         customuser = User.objects.get(email=email)
-        #     except User.DoesNotExist:
-        #         self.add_error('email', '입력 값이 옳바르지 않습니다.')
-        #     if not password(password, User.objects.get(password=password)):
-        #         self.add_error('password', '입력 값이 옳바르지 않습니다.')
+        if email and password:
+            try:
+                customuser = User.objects.get(email=email)
+            except User.DoesNotExist:
+                self.add_error('email', '입력 값이 옳바르지 않습니다.')
+            if not password(password, customuser.password):
+                self.add_error('password', '입력 값이 옳바르지 않습니다.')
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
