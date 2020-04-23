@@ -14,7 +14,7 @@ from .models import User
 class RegisterView(CreateView):
     form_class = RegisterForm
     template_name = 'account/Register.html'
-    success_url = '/account/Login'
+    success_url = '/Login'
     # success_url = reverse_lazy('login')
 
     def form_valid(self, form):
@@ -32,7 +32,7 @@ class RegisterView(CreateView):
         )
         customuser.save()
 
-        return super().form_valid(form)
+        return super(RegisterView, self).form_valid(form)
 
 
 class LoginView(LoginView):
