@@ -71,7 +71,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         ]
     )
 
-    mobile_number = models.CharField(verbose_name='연락처', db_column='mobile_number', max_length=13, unique=True, blank=False, null=False,
+    mobile_phone = models.CharField(verbose_name='연락처', db_column='mobile_phone', max_length=13, unique=True, blank=False, null=False,
         validators=[
             RegexValidator(
                 regex=r'^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$',
