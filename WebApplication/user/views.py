@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic.edit import CreateView
@@ -13,7 +14,7 @@ from .models import User
 class RegisterView(CreateView):
     form_class = RegisterForm
     template_name = 'account/Register.html'
-    success_url = 'account/Login'
+    success_url = '/account/Login'
     # success_url = reverse_lazy('login')
 
     def form_valid(self, form):
@@ -24,7 +25,10 @@ class RegisterView(CreateView):
             date_of_birth=form.data.get('date_of_birth'),
             gender=form.data.get('gender'),
             password=make_password(form.data.get('password')),
-            is_active=True,
+            is_active=False,
+            is_admin=False,
+            is_staff=False,
+            is_superuser=False
         )
         customuser.save()
 
@@ -35,10 +39,6 @@ class LoginView(LoginView):
     form_class = LoginForm
     template_name = 'account/Login.html'
     # context_object_name = 'forms'
-
-    def form_valid(self, form):
-        self.request.session['user'] = form.data.get('email')
-        return super().form_valid(form)
 
 
 class LogoutView(LogoutView):
