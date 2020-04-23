@@ -6,16 +6,23 @@
 
 {% block content %}
 
-<form class="box" method="POST" action="{% url 'user:SignUp' %}">
+<form class="box" method="POST" action=".">
     {% csrf_token %}
     <h1>회원가입</h1>
     {{ form.email }}
+    {{ form.email.errors|striptags }}
     {{ form.username }}
+    {{ form.username.errors|striptags }}
     {{ form.mobile_number }}
+    {{ form.mobile_number.errors|striptags }}
     {{ form.date_of_birth }}
+    {{ form.date_of_birth.errors|striptags }}
     {{ form.gender }}
+    {{ form.gender.errors|striptags }}
     {{ form.password }}
+    {{ form.password.errors|striptags }}
     {{ form.password2 }}
+    {{ form.password2.errors|striptags }}
     <button type="submit" class="btn btn-success">가입하기</button>
 </form>
 
