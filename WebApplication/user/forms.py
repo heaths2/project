@@ -102,14 +102,11 @@ class RegisterForm(forms.ModelForm):
             raise forms.ValidationError('패스워드가 일치하지 않습니다.')
         return password2
 
-    def save(self, request):
+    def save(self, commit=True):
         user = super(RegisterForm, self).save(commit=False)
-        user.email = request.POST.get('email')
-        user.username = request.POST.get('username')
-        user.mobile_phone = request.POST.get('mobile_phone')
-        user.date_of_birth = request.POST.get('date_of_birth')
-        user.gender = request.POST.get('gender')
-        user.save()
+        user.set_password(self.cleaned_data["password"])
+        if commit:
+            user.save()
         return user
 
 
