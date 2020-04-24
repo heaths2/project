@@ -5,9 +5,9 @@ from .models import User
 
 
 class RegisterForm(forms.ModelForm):
-    date_of_birth = forms.DateTimeField(label='생년월일',
+    date_of_birth = forms.DateField(label='생년월일',
         # input_formats=['%Y/%m/%d %h:%m'],
-        widget=forms.DateTimeInput(attrs={
+        widget=forms.DateInput(attrs={
             'class': 'form-control', 'name': 'date_of_birth', 'placeholder': 'Date Of Birth', 'type': 'date', 'value': '1990-01-01'
         }),
         required=True,
