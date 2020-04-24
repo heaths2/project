@@ -7,7 +7,7 @@ from .models import User
 class RegisterForm(forms.ModelForm):
     date_of_birth = forms.DateTimeField(label='생년월일',
         # input_formats=['%Y/%m/%d %h:%m'],
-        widget=forms.DateInput(attrs={
+        widget=forms.DateTimeInput(attrs={
             'class': 'form-control', 'name': 'date_of_birth', 'placeholder': 'Date Of Birth', 'type': 'date', 'value': '1990-01-01'
         }),
         required=True,
@@ -28,13 +28,12 @@ class RegisterForm(forms.ModelForm):
     class Meta:
         model = User
         fields = [
-            'email', 'username', 'mobile_number', 'date_of_birth', 'gender', 'password',
+            'email', 'username', 'mobile_phone', 'date_of_birth', 'gender', 'password',
         ]
         labels = {
             'email': '이메일',
             'username': '이름',
-            'mobile_number': '휴대폰',
-            'date_of_birth': '생년월일',
+            'mobile_phone': '휴대폰',
             'gender': '성별',
             'password': '비밀번호',
         }
@@ -45,8 +44,9 @@ class RegisterForm(forms.ModelForm):
             'username': {
                 'required': _('이름을 입력하시오.'),
             },
-            'mobile_number': {
+            'mobile_phone': {
                 'required': _('휴대폰번호를 입력하시오.'),
+                'ValidationError': _('다른 연락처를 입력하시오.'),
             },
             'gender': {
                 'required': _('성별을 입력하시오.'),
@@ -62,11 +62,8 @@ class RegisterForm(forms.ModelForm):
             'username': forms.TextInput(attrs={
                 'class': 'form-control', 'name': 'username', 'placeholder': 'Username',
             }),
-            'mobile_number': forms.TextInput(attrs={
-                'class': 'form-control', 'name': 'mobile_number', 'placeholder': '연락처 : 010-1234-5678', 'type': 'tel',
-            }),
-            'date_of_birth': forms.SelectDateWidget(attrs={
-                'class': 'form-control', 'name': 'date_of_birth', 'placeholder': 'Date Of Birth', 'type': 'date', 'value': '1990-01-01'
+            'mobile_phone': forms.TextInput(attrs={
+                'class': 'form-control', 'name': 'mobile_phone', 'placeholder': '연락처 : 010-1234-5678', 'type': 'tel',
             }),
             'gender': forms.Select(attrs={
                 'class': 'form-control', 'name': 'gender', 'placeholder': 'Gender',
@@ -76,12 +73,44 @@ class RegisterForm(forms.ModelForm):
             }),
         }
 
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        queryset = User.objects.filter(email=email)
+        if queryset.exists():
+	        raise forms.ValidationError('다른 이메일 주소를 입력하시오.')
+        return email
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        queryset = User.objects.filter(username=username)
+        if queryset.exists():
+	        raise forms.ValidationError('다른 이름를 입력하시오.')
+        return username
+
+    def clean_phone(self):
+        # cleaned_data = super().clean()
+        phone = self.cleaned_data.get('mobile_phone')
+        queryset = User.objects.filter(phone=phone)
+        if queryset.exists():
+	        raise forms.ValidationError('다른 연락처를 입력하시오.')
+        return phone
+
     def clean_password2(self):
         password = self.cleaned_data.get('password')
         password2 = self.cleaned_data.get('password2')
         if password and password2 and password != password2:
             raise forms.ValidationError('패스워드가 일치하지 않습니다.')
         return password2
+
+    def save(self, request):
+        user = super(RegisterForm, self).save(commit=False)
+        user.email = request.POST.get('email')
+        user.username = request.POST.get('username')
+        user.mobile_phone = request.POST.get('mobile_phone')
+        user.date_of_birth = request.POST.get('date_of_birth')
+        user.gender = request.POST.get('gender')
+        user.save()
+        return user
 
 
 class LoginForm(forms.ModelForm):
