@@ -80,7 +80,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         ],
     )
 
-    date_of_birth = models.DateTimeField(verbose_name='생년월일', db_column='date_of_birth', default='1999-01-01 00:00:00', blank=False, null=False)
+    date_of_birth = models.DateField(verbose_name='생년월일', db_column='date_of_birth', default='1999-01-01', blank=False, null=False)
 
     GENDER_CHOICES = (
         (0, '선택하지 않음'),
