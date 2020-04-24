@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.views import LoginView, LogoutView
@@ -14,30 +13,31 @@ from .models import User
 class RegisterView(CreateView):
     form_class = RegisterForm
     template_name = 'account/Register.html'
-    success_url = '/Login/'
-    # success_url = reverse_lazy('login')
+    success_url = '/account/Login'
 
-    def form_valid(self, form):
-        customuser = User(
-            email=form.data.get('email'),
-            username=form.data.get('username'),
-            mobile_phone=form.data.get('mobile_phone'),
-            date_of_birth=form.data.get('date_of_birth'),
-            gender=form.data.get('gender'),
-            password=make_password(form.data.get('password')),
-            is_active=False,
-            is_admin=False,
-            is_staff=False,
-            is_superuser=False
-        )
-        customuser.save()
+    # forms.Form 경우 유효성 검사 후 save()사용
+    # def form_valid(self, form):
+    #     customuser = User(
+    #         email=form.data.get('email'),
+    #         username=form.data.get('username'),
+    #         mobile_phone=form.data.get('mobile_phone'),
+    #         date_of_birth=form.data.get('date_of_birth'),
+    #         gender=form.data.get('gender'),
+    #         password=make_password(form.data.get('password')),
+    #         is_active=False,
+    #         is_admin=False,
+    #         is_staff=False,
+    #         is_superuser=False
+    #     )
+    #     customuser.save()
 
-        return super(RegisterView, self).form_valid(form)
+    #     return super(RegisterView, self).form_valid(form)
 
 
-class LoginView(LoginView):
+class AccountLoginView(LoginView):
     form_class = LoginForm
     template_name = 'account/Login.html'
+    success_url = '/admin'
     # context_object_name = 'forms'
 
 
