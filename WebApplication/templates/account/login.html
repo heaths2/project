@@ -10,7 +10,9 @@
     {% csrf_token %}
     <h1>로그인</h1>
     {{ form.email }}
+    {{ form.email.errors }}
     {{ form.password }}
+    {{ form.password.errors }}
     <button type="submit" class="btn btn-success">로그인</button>
 </form>
 
