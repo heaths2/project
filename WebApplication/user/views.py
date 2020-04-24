@@ -14,14 +14,14 @@ from .models import User
 class RegisterView(CreateView):
     form_class = RegisterForm
     template_name = 'account/Register.html'
-    success_url = '/Login'
+    success_url = '/Login/'
     # success_url = reverse_lazy('login')
 
     def form_valid(self, form):
         customuser = User(
             email=form.data.get('email'),
             username=form.data.get('username'),
-            mobile_number=form.data.get('mobile_number'),
+            mobile_phone=form.data.get('mobile_phone'),
             date_of_birth=form.data.get('date_of_birth'),
             gender=form.data.get('gender'),
             password=make_password(form.data.get('password')),
