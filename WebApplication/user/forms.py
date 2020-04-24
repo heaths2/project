@@ -102,12 +102,28 @@ class RegisterForm(forms.ModelForm):
             raise forms.ValidationError('패스워드가 일치하지 않습니다.')
         return password2
 
+    # forms.ModelForm 자동 save() ※중복 저장 주의
     def save(self, commit=True):
         user = super(RegisterForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password"])
         if commit:
             user.save()
         return user
+
+    # def save(self, commit=False):
+    #     self.instance = User(**self.cleaned_data)
+    #     if commit:
+    #         self.instance.save()
+    #     return self.instance
+
+    # def save(self, commit=True):
+    #     # Save the provided password in hashed format
+    #     user = super(UserCreationForm, self).save(commit=False)
+    #     user.email = CustomUserManager.normalize_email(self.cleaned_data['email'])
+    #     user.set_password(self.cleaned_data["password"])
+    #     if commit:
+    #         user.save()
+    #     return user
 
 
 class LoginForm(forms.ModelForm):
@@ -143,16 +159,13 @@ class LoginForm(forms.ModelForm):
         }
 
     def clean_login(self):
-        email = self.cleand_data.get('email')
-        password = self.cleand_data.get('password')
-
-        if email and password:
-            try:
-                customuser = User.objects.get(email=email)
-            except User.DoesNotExist:
-                self.add_error('email', '입력 값이 옳바르지 않습니다.')
-            if not password(password, customuser.password):
-                self.add_error('password', '입력 값이 옳바르지 않습니다.')
+        username = self.cleaned_data.get('username')
+        queryset1 = User.objects.filter(username=username)
+        password = self.cleaned_data.get('password')
+        queryset2 = User.objects.filter(password=password)
+        if queryset1.exists() and queryset2.exists():
+	        raise forms.ValidationError('입력 값이 옳바르지 않습니다.')
+        return username, password
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
