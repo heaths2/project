@@ -124,6 +124,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     #     return True
 
     class Meta:
-        verbose_name = _('user')
-        verbose_name_plural = _('user')
+        verbose_name = _('사용자')
+        verbose_name_plural = _('사용자')
         db_table = 'g_account_custom_user'
