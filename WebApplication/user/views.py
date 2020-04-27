@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.views import LoginView, LogoutView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import FormView, CreateView
 from rest_framework import viewsets, permissions
 
 from .serializers import AccountSerializer
@@ -34,11 +34,12 @@ class RegisterView(CreateView):
     #     return super(RegisterView, self).form_valid(form)
 
 
-class AccountLoginView(LoginView):
+class AccountLoginView(LoginView):  # 로그인
     form_class = LoginForm
     template_name = 'account/Login.html'
-    success_url = '/admin'
-    # context_object_name = 'forms'
+
+    def form_invalid(self, form):
+        return super().form_invalid(form) 
 
 
 class LogoutView(LogoutView):
