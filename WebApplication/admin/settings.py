@@ -234,5 +234,6 @@ AUTH_USER_MODEL = 'user.User'
 
 LOGIN_URL = '/account/Login/'
 # LOGIN_REDIRECT_URL = 'blog/list'
-LOGIN_REDIRECT_URL = '/admin'
+# LOGIN_REDIRECT_URL = '/admin'
+LOGIN_REDIRECT_URL = '/blog/list'
 LOGOUT_REDIRECT_URL = '/account/Login/'
