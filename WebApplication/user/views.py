@@ -3,6 +3,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth import login, authenticate
 from django.contrib.auth import views as auth_views
 from django.views.generic.edit import FormView, CreateView
+from django.conf import settings
 from rest_framework import viewsets, permissions
 
 from .serializers import AccountSerializer
@@ -33,13 +34,6 @@ class RegisterView(CreateView):
 
     #     return super(RegisterView, self).form_valid(form)
 
-# class LoginView(auth_views.LoginView):  # 로그인
-#     form_class = LoginForm
-#     template_name = 'account/Login.html'
-
-#     def form_invalid(self, form):
-#         return super(LoginView, self).form_invalid(form) 
-
 # def AccountLoginView(request):
 #     if request.method == 'POST':
 #         login_form = LoginForm(request, request.POST)
@@ -57,9 +51,33 @@ class LoginView(auth_views.LoginView):
     form_class = LoginForm
     template_name = 'account/Login.html'
 
+    def dispatch(self, request, *args, **kwargs):
+        # Sets a test cookie to make sure the user has cookies enabled
+        request.session.get('email')
+
+        return super(LoginView, self).dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        auth_login(self.request, form.get_user())
+
+        # If the test cookie worked, go ahead and
+        # delete it since its no longer needed
+        if self.request.session.test_cookie_worked():
+            self.request.session.delete_test_cookie()
+
+        return super(LoginView, self).form_valid(form)
+
+    def get_success_url(self):
+        url = self.get_redirect_url()
+        return url or resolve_url(settings.LOGIN_REDIRECT_URL)
+
 
 class LogoutView(auth_views.LogoutView):
-    pass
+    url = '/account/login'
+
+    def get(self, request, *args, **kwargs):
+        auth_logout(request)
+        return super(LogoutView, self).get(request, *args, **kwargs)
 
 
 class AccountViewSet(viewsets.ModelViewSet):

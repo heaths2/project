@@ -1,5 +1,5 @@
 from django import forms
-# from django.core.exceptions import ValidationError
+from django.db.models import Q
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.utils.translation import gettext_lazy as _
 
@@ -47,7 +47,7 @@ class RegisterForm(forms.ModelForm):
                 'required': _('이름을 입력하시오.'),
             },
             'phone': {
-                'required': _('휴대폰번호를 입력하시오.'),
+                'required': _('연락처를 입력하시오.'),
             },
             'gender': {
                 'required': _('성별을 입력하시오.'),
@@ -92,7 +92,7 @@ class RegisterForm(forms.ModelForm):
         phone = self.cleaned_data.get('phone')
         queryset = User.objects.filter(phone=phone)
         if queryset.exists():
-	        raise forms.ValidationError('다른 이름를 입력하시오.')
+	        raise forms.ValidationError('다른 연락처를 입력하시오.')
         return phone
 
     def clean_password2(self):
@@ -114,42 +114,8 @@ class RegisterForm(forms.ModelForm):
             user.save()
         return user
 
-    # def save(self, commit=False):
-    #     self.instance = User(**self.cleaned_data)
-    #     if commit:
-    #         self.instance.save()
-    #     return self.instance
 
-    # def save(self, commit=True):
-    #     # Save the provided password in hashed format
-    #     user = super(UserCreationForm, self).save(commit=False)
-    #     user.email = CustomUserManager.normalize_email(self.cleaned_data['email'])
-    #     user.set_password(self.cleaned_data["password"])
-    #     if commit:
-    #         user.save()
-    #     return user
-
-
-# class LoginForm(forms.ModelForm):
-class LoginForm(AuthenticationForm):
-    email = forms.EmailField(label='이메일',
-        widget=forms.EmailInput(attrs={
-            'class': 'form-control', 'name': 'email', 'placeholder': 'Email', 'type': 'email',
-        }),
-        required=True,
-        error_messages={
-            'required' : '이메일 주소를 입력하시오.'
-        },
-    )
-    password = forms.CharField(label='비밀번호 확인',
-        widget=forms.PasswordInput(attrs={
-            'class': 'form-control', 'name': 'password', 'placeholder': 'Password Confirm', 'type': 'password',
-        }),
-        required=True,
-        error_messages={
-            'required' : '비밀번호를 입력하시오.'
-        },
-    )
+class LoginForm(forms.ModelForm):
 
     class Meta:
         model = User
@@ -181,20 +147,23 @@ class LoginForm(AuthenticationForm):
             }),
         }
 
-    def clean_login(self):
-        username = self.cleaned_data.get('username')
-        queryset1 = User.objects.filter(username=username)
-        print(queryset1)
+    def clean(self, *args, **kwargs):
+        query = self.cleaned_data.get('query')
         password = self.cleaned_data.get('password')
-        queryset2 = User.objects.filter(password=password)
-        print(queryset2)
-        if queryset1.exists() and queryset2.exists():
-	        raise forms.ValidationError('입력 값이 옳바르지 않습니다.')
-        return 
+        e_qs = User.objects.filter(
+            Q(email__iexact=query)
+        ).distinct()
+        if not e_qs.exists() and e_qs.count != 1:
+            raise forms.ValidationError('입력 값이 옳바르지 않습니다.')
+        e_q = e_qs.firse()
+        if not e_q.check_password(password):
+            raise forms.ValidationError('입력 값이 옳바르지 않습니다.')
+        self.cleaned_data['e_q'] = e_q
+        return supuer(LoginForm, self).clean(*args, **kwargs)
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
-        super(LoginForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     # def save(self, commit=False):
     #     self.instance = User(**self.cleaned_data)
@@ -202,3 +171,42 @@ class LoginForm(AuthenticationForm):
     #         self.instance.save()
     #     return self.instance
 
+# class LoginForm(forms.Form):
+
+#     def __init__(self, *args, **kwargs):
+#         super(LoginForm, self).__init__(*args, **kwargs)
+#         self.request = kwargs.pop('request', None)
+
+#     query = forms.EmailField(label='이메일',
+#         widget=forms.EmailInput(attrs={
+#             'class': 'form-control', 'name': 'email', 'placeholder': 'Email', 'type': 'email',
+#         }),
+#         required=True,
+#         error_messages={
+#             'required' : '이메일 주소를 입력하시오.'
+#         },
+#     )
+#     password = forms.CharField(label='비밀번호 확인',
+#         widget=forms.PasswordInput(attrs={
+#             'class': 'form-control', 'name': 'password', 'placeholder': 'Password Confirm', 'type': 'password',
+#         }),
+#         required=True,
+#         error_messages={
+#             'required' : '비밀번호를 입력하시오.'
+#         },
+#     )
+
+#     def clean(self, *args, **kwargs):
+#         query = self.cleaned_data.get('query')
+#         password = self.cleaned_data.get('password')
+#         e_qs = User.objects.filter(
+#             Q(email__iexact=query)
+#         ).distinct()
+#         if not e_qs.exists() and e_qs.count != 1:
+#             raise forms.ValidationError('입력 값이 옳바르지 않습니다.')
+#         e_q = e_qs.firse()
+#         if not e_q.check_password(password):
+#             raise forms.ValidationError('입력 값이 옳바르지 않습니다.')
+#         self.cleaned_data['e_q'] = e_q
+#         return supuer(LoginForm, self).clean(*args, **kwargs)
+        

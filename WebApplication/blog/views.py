@@ -12,7 +12,8 @@ from .serializers import PostSerializer, CommentSerializer
 
 class PostListView(LoginRequiredMixin, ListView):
     model = Post
-    template_name = 'blog/List.html'
+    # template_name = 'blog/List.html'
+    template_name = 'blog/post_list.html'
     paginate_by = 10
 
     class Meta:
