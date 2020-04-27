@@ -1,7 +1,10 @@
 from django.urls import include, path
 from rest_framework import routers
+# from django.contrib.auth import views as auth_views
 
-from .views import RegisterView, AccountLoginView, LogoutView
+# from .views import RegisterView, LogoutView
+from .views import RegisterView, LoginView, LogoutView
+
 from . import views
 
 router = routers.DefaultRouter()
@@ -9,9 +12,9 @@ router.register(r'account', views.AccountViewSet)
 
 app_name = 'user'
 urlpatterns = [
-    # path('login/', LoginView.as_view(template_name='account/login.html'), name="login"),/
+    # path('Login/', auth_views.LoginView.as_view(template_name='account/Login.html'), name="Login"),
     path('SignUp/', RegisterView.as_view(), name="SignUp"),
-    path('Login/', AccountLoginView.as_view(), name="Login"),
+    path('Login/', LoginView.as_view(), name="Login"),
     path('Logout/', LogoutView.as_view(), name="Logout"),
     # path('rest-auth/', include('rest_auth.urls')),
     # path('rest-auth/registration/', include('rest_auth.registration.urls')),
