@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth import views as auth_views
 from django.views.generic.edit import FormView, CreateView
 from rest_framework import viewsets, permissions
 
@@ -33,16 +33,32 @@ class RegisterView(CreateView):
 
     #     return super(RegisterView, self).form_valid(form)
 
+# class LoginView(auth_views.LoginView):  # 로그인
+#     form_class = LoginForm
+#     template_name = 'account/Login.html'
 
-class AccountLoginView(LoginView):  # 로그인
+#     def form_invalid(self, form):
+#         return super(LoginView, self).form_invalid(form) 
+
+# def AccountLoginView(request):
+#     if request.method == 'POST':
+#         login_form = LoginForm(request, request.POST)
+#         if login_form.is_valid():
+#             auth_login(request, login_form.get_user())
+#         return redirect('/admin')
+    
+#     else:
+#         login_form = LoginForm()
+    
+#     return render(request, 'account/Login.html', {'login_form' : login_form})
+
+
+class LoginView(auth_views.LoginView):
     form_class = LoginForm
     template_name = 'account/Login.html'
 
-    def form_invalid(self, form):
-        return super().form_invalid(form) 
 
-
-class LogoutView(LogoutView):
+class LogoutView(auth_views.LogoutView):
     pass
 
 
