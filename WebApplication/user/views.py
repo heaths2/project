@@ -50,7 +50,7 @@ class LogoutView(auth_views.LogoutView):
     url = '/account/login'
 
     def get(self, request, *args, **kwargs):
-        if request.session['user']:        
+        if request.session['user']:
             logout(request)
             del (request.session['user'])
 
