@@ -25,7 +25,7 @@ class Post(BaseModel):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('post_detail', kwargs={'pk': self.pk})
+        return reverse('blog:list', kwargs={'pk': self.pk})
 
     class Meta:
         db_table = 'g_blog'
