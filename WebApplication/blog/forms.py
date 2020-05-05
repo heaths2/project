@@ -74,78 +74,31 @@ class PostForm(forms.ModelForm):
         }
 
 
-class LoginForm(forms.ModelForm):
+class CommentForm(forms.ModelForm):
 
     class Meta:
-        model = User
-        fields = ['email', 'password']
+        model = Comment
+        fields = [
+            'author', 'post', 'content',
+        ]
         labels = {
-            'email': '이메일',
-            'password': '비밀번호',
+            'author': '작성자',
+            'post': '제목'',
+            'content': '내용',
         }
         error_messages = {
-            'email': {
-                'required': _('이메일 주소를 입력하시오.'),
+            'author': {
+                'required': _('작성자를 입력하시오.'),
             },
-            'password': {
-                'required': _('비밀번호를 입력하시오.'),
+            'post': {
+                'required': _('이름을 입력하시오.'),
+            },
+            'content': {
+                'required': _('덧글을 입력하시오.'),
             },
         }
         widgets = {
-            'email': forms.EmailInput(attrs={
-                'class': 'form-control',
-                'name': 'email',
-                'placeholder': 'Email',
-                'required': 'True',
-            }),
-            'password': forms.PasswordInput(attrs={
-                'class': 'form-control',
-                'name': 'password',
-                'placeholder': 'Password',
-                'required': 'True',
+            'content': forms.TextInput(attrs={
+                'class': 'form-control', 'name': 'content', 'placeholder': 'content', 'required': 'True',
             }),
         }
-
-    def __init__(self, request=None, *args, **kwargs):
-        """
-        The 'request' parameter is set for custom auth use by subclasses.
-        The form data comes in via the standard 'data' kwarg.
-        """
-        self.request = request
-        super().__init__(*args, **kwargs)
-
-    def clean(self):
-        email = self.cleaned_data.get('email')
-        password = self.cleaned_data.get('password')
-
-        if email is not None and password:
-            self.auth_login = authenticate(
-                self.request, email=email, password=password)
-            if self.auth_login is None:
-                raise forms.ValidationError('다른 이름를 입력하시오.')
-
-        return self.cleaned_data
-
-    # def clean(self, *args, **kwargs):
-    #     query = self.cleaned_data.get('query')
-    #     password = self.cleaned_data.get('password')
-    #     e_qs = User.objects.filter(
-    #         Q(email__iexact=query)
-    #     ).distinct()
-    #     if not e_qs.exists() and e_qs.count != 1:
-    #         raise forms.ValidationError('입력 값이 옳바르지 않습니다.')
-    #     e_q = e_qs.firse()
-    #     if not e_q.check_password(password):
-    #         raise forms.ValidationError('입력 값이 옳바르지 않습니다.')
-    #     self.cleaned_data['e_q'] = e_q
-    #     return supuer(LoginForm, self).clean(*args, **kwargs)
-
-    # def __init__(self, *args, **kwargs):
-    #     self.request = kwargs.pop('request', None)
-    #     super().__init__(*args, **kwargs)
-
-    # def save(self, commit=False):
-    #     self.instance = User(**self.cleaned_data)
-    #     if commit:
-    #         self.instance.save()
-    #     return self.instance
