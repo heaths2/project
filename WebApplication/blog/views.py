@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse_lazy
 from django.utils import timezone
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
@@ -27,16 +28,25 @@ class PostDetailView(LoginRequiredMixin, DetailView):
     template_name = 'blog/post_detail.html'
 
 
-class PostCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['author', 'title', 'content', 'image', 'files']
     template_name = 'blog/post_edit.html'
     login_url = 'sso/Login'
-    success_url = '/'
+    success_url = reverse_lazy('blog:list')
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+    # def get_success_url(self):
+    #     return '/'
+
+    # def test_func(self):
+    #     post = self.get_object()
+    #     if self.request.user == post.author:
+    #         return True
+    #     return False
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -49,17 +59,15 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-    def test_func(self):
-        post = self.get_object()
-        if self.request.user == post.author:
-            return True
-        return False
+    # def get_object(self, pk):
+    #     pk = self.kwargs.get("pk)"
+    #     return get_object_or_404(Post, pk=pk)
 
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     # success_url = reverse_lazy('author-list')
-    # success_url = '/'
+    success_url = 'blog:list'
 
     def test_func(self):
         post = self.get_object()
