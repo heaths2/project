@@ -1,0 +1,27 @@
+{% extends "_base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Post detail{% endblock title %}
+
+{% block Article %}
+{{ form.is_authenticated }}
+<div class="article-section-area">
+    <article>
+        <form class="post" method="POST" action="{% url 'blog:detail' %}">
+            {% csrf_token %}
+            <h1>글쓰기</h1>
+            {{ form.author| crispy }}
+            {{ form.author.errors|striptags }}
+            {{ form.title| crispy }}
+            {{ form.title.errors|striptags }}
+            {{ form.content| crispy }}
+            {{ form.content.errors|striptags }}
+            {{ form.image| crispy }}
+            {{ form.image.errors|striptags }}
+            {{ form.files| crispy }}
+            {{ form.files.errors|striptags }}
+            <button type="submit" class="btn btn-success">등록</button>
+        </form>
+    </article>
+</div>
+
+{% endblock Article %}
