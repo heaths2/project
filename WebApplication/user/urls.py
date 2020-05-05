@@ -2,7 +2,9 @@ from django.urls import include, path
 from rest_framework import routers
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
-from .views import RegisterView, LoginView, LogoutView
+from .views import (
+    RegisterView, LoginView, LogoutView, RegisterAPI, LoginAPI, UserAPI,
+)
 
 from . import views
 
@@ -18,10 +20,12 @@ urlpatterns = [
     path('Logout/', LogoutView.as_view(), name="Logout"),
     path(
         'jwt/', include([
-        path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-        path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-        path('verify/', TokenVerifyView.as_view(), name='token_verify'),
-    ])),
-    # path('rest-auth/', include('rest_auth.urls')),
-    # path('rest-auth/registration/', include('rest_auth.registration.urls')),
+            path('token/', TokenObtainPairView.as_view(),
+                 name='token_obtain_pair'),
+            path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+            path('verify/', TokenVerifyView.as_view(), name='token_verify'),
+        ])),
+    path('ssosign/', RegisterAPI.as_view(), name="ssosign"),
+    path('ssoin/', LoginAPI.as_view(), name="ssoin"),
+    path('ssoout/', UserAPI.as_view(), name="ssoout"),
 ]
