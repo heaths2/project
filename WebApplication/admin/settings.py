@@ -246,8 +246,9 @@ REST_FRAMEWORK = {
 
 AUTH_USER_MODEL = 'user.User'
 
-LOGIN_URL = '/account/Login/'
-# LOGIN_REDIRECT_URL = 'blog/list'
-# LOGIN_REDIRECT_URL = '/admin'
+# Login & Logout Default Settings
+LOGIN_URL = '/sso/Login/'
+LOGOUT_URL = '/sso/Login'
+
 LOGIN_REDIRECT_URL = '/blog/list'
-LOGOUT_REDIRECT_URL = '/account/Login/'
+LOGOUT_REDIRECT_URL = '/sso/Login/'
