@@ -51,6 +51,9 @@ INSTALLED_APPS += [
     'api.apps.ApiConfig',
     'support.apps.SupportConfig',
 
+    # Crispy Form
+    'crispy_forms',
+
     # Django REST framewok
     'rest_framework',
     'rest_framework.authtoken',
@@ -162,6 +165,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     # '/var/www/static/',
 ]
+
+# Crispy Form CSS
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # 각 media 파일에 대한 URL Prefix
 MEDIA_URL = '/media/'  # 항상 / 로 끝나도록 설정

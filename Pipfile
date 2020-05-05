@@ -16,6 +16,7 @@ pillow = "*"
 djangorestframework = "*"
 djangorestframework-simplejwt = "*"
 django-summernote = "*"
+django-crispy-forms = "*"
 
 [requires]
 python_version = "3.8"
