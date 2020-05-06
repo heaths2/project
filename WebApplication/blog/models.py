@@ -45,7 +45,7 @@ class Comment(BaseModel):
     #     return '%s. %s' % (self.id, self.post)
 
     def __str__(self):
-        return f'{self.id, self.post}' 
+        return f'{ self.id }, { self.post }'
 
     class Meta:
         db_table = 'g_comment'
