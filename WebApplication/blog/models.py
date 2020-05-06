@@ -41,8 +41,11 @@ class Comment(BaseModel):
     content = models.TextField(
         db_column='content', verbose_name='내용', blank=True, null=True)
 
+    # def __str__(self):
+    #     return '%s. %s' % (self.id, self.post)
+
     def __str__(self):
-        return '%s. %s' % (self.id, self.post)
+        return f'{self.id, self.post}' 
 
     class Meta:
         db_table = 'g_comment'
