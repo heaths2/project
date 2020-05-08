@@ -91,7 +91,7 @@ table {
 
 /* 큰 기기들 (큰 데스크탑, 1200px 이상) */
 /* @media (min-width: @screen-lg-min) { ... } */
-* {box-sizing: border-box;}
+
 #container {
     max-width: 100%;
     height: auto;
