@@ -51,6 +51,9 @@ INSTALLED_APPS += [
     'api.apps.ApiConfig',
     'support.apps.SupportConfig',
 
+    # Humanize Add
+    'django.contrib.humanize',
+
     # Crispy Form
     'crispy_forms',
 
