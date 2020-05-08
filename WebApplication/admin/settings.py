@@ -257,3 +257,6 @@ LOGOUT_URL = '/sso/Login'
 
 LOGIN_REDIRECT_URL = '/blog/list'
 LOGOUT_REDIRECT_URL = '/sso/Login/'
+
+# Summernote Config
+SUMMERNOTE_CONFIG = {}
