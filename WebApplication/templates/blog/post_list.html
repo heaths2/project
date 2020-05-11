@@ -1,6 +1,11 @@
-{{ form.as_table }}
-{{ posts }}
-
-{% for post in posts %}
-{{ post }}
-{% endfor %}
+{% extends "_base.html" %}
+{% block title %}Post List{% endblock title %}
+{% block Article %}
+<article class="article-section-area">
+    <div class="tab-pane fade show active" id="home">
+        <div id="article-area" class="container-article" style="width: 100%;">
+            <div class="wrap-article">
+            </div>
+        </div>
+</article>
+{% endblock Article %}
