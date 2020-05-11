@@ -2,18 +2,19 @@ from django import forms
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 from django_summernote import fields as SFields
+from django_summernote.widgets import SummernoteWidget
 
 from .models import Post, Comment
 
 
 class PostForm(forms.ModelForm):
-    content = SFields.SummernoteTextFormField(label='내용',
-                                    # input_formats=['%Y/%m/%d %h:%m'],
-                                    required=True,
-                                    error_messages={
-                                        'required': '내용을 입력하시오.'
-                                    },
-                                    )
+    # content = SFields.SummernoteTextFormField(label='내용',
+    #                                 # input_formats=['%Y/%m/%d %h:%m'],
+    #                                 required=True,
+    #                                 error_messages={
+    #                                     'required': '내용을 입력하시오.'
+    #                                 },
+    #                                 )
 
     class Meta:
         model = Post
@@ -51,7 +52,7 @@ class PostForm(forms.ModelForm):
             'title': forms.TextInput(attrs={
                 'class': 'form-control', 'name': 'title', 'placeholder': 'Title',
             }),
-            'content': forms.Textarea(attrs={
+            'content': SummernoteWidget(attrs={
                 'class': 'form-control', 'name': 'content', 'placeholder': 'content',
             }),
             'image': forms.Select(attrs={
