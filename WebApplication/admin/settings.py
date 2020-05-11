@@ -262,4 +262,14 @@ LOGIN_REDIRECT_URL = '/blog/list'
 LOGOUT_REDIRECT_URL = '/sso/Login/'
 
 # Summernote Config
-SUMMERNOTE_CONFIG = {}
+SUMMERNOTE_CONFIG = {
+    'iframe': True,
+    'summernote': {
+        # As an example, using Summernote Air-mode
+        'airMode': False,
+        'width': '100%',
+        'height': '480',
+        # 'toolbar': ['bold', 'italic', 'underline'],
+    },
+    'disable_attachment': True,
+}
