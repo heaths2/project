@@ -1,28 +1,31 @@
 {% extends "_base.html" %}
 {% load crispy_forms_tags %}
-{% block title %}Post detail{% endblock title %}
+{% load staticfiles %}
+
+{% block title %}Post Detail{% endblock title %}
 
 {% block Article %}
-{{ form.is_authenticated }}
+<!-- Article area start-->
 <article class="article-section-area">
-    <div id="myTabContent" class="tab-content">
-        <div class="tab-pane fade show active" id="home">
-            <div class="limiter">
-                <div class="container-table100">
-                    <div class="wrap-table100">
+    <div class="tab-pane fade show active" id="home">
 
-                        <form class="post" method="POST" action="{% url 'blog:create' %}">
-                            {% csrf_token %}
-                            <h1>글쓰기</h1>
-                            <hr>
-                            {{ form|crispy }}
-                            <button type="submit" class="btn btn-success">등록</button>
-                        </form>
+        <div class="container-article">
+            <input type="button" value="글쓰기">
+            <div class="button"><a class="btn btn-primary  btn-sm btn-block" href="{% url 'blog:create' %}">글쓰기</a>
 
-                    </div>
-                </div>
+            </div>
+            <hr>
+            <div class="wrap-table">
+                <form class="post" method="POST" action="{% url 'blog:create' %}">
+                    {% csrf_token %}
+                    <h1>글쓰기</h1>
+                    <hr>
+                    {{ form|crispy }}
+                    <button type="submit" class="btn btn-success">등록</button>
+                </form>
             </div>
         </div>
     </div>
 </article>
+<!-- Article area End-->
 {% endblock Article %}
