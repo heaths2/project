@@ -12,20 +12,30 @@ from .serializers import PostSerializer, CommentSerializer
 
 
 class PostListView(LoginRequiredMixin, ListView):
-    model = Post
-    # template_name = 'blog/List.html'
-    template_name = 'blog/post_list.html'
-    context_object_name = 'posts'
-    # ordering = ['-create_at']
-    paginate_by = 10
+    template_name = 'blog/List.html'
+    # template_name = 'blog/post_list.html'
+    queryset = Post.objects.all()
+    # queryset = Post.objects.all().order_by('-created_at')[:10]
+    ordering = ['-created_at']
+    # paginate_by = 10
+    login_url = 'sso/Login'
 
-    class Meta:
-        get_latest_by = ['-create_at']
+    # print(queryset)
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(PostListView, self).get_context_data(**kwargs)
+    #     context['form'] = PostListView()
+    #     return context
 
 
 class PostDetailView(LoginRequiredMixin, DetailView):
-    model = Post
     template_name = 'blog/post_detail.html'
+    # queryset = Post.objects.filter(id__gt=1)
+    login_url = 'sso/Login'
+
+    def get_object(self):
+        _id = self.kwargs.get("id")
+        return get_object_or_404(Post, pk=_id)
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
@@ -54,6 +64,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     fields = ['author', 'title', 'content', 'image', 'files']
     template_name = 'blog/post_edit.html'
     login_url = 'sso/login'
+    success_url = reverse_lazy('blog:list')
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -67,6 +78,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     # success_url = reverse_lazy('author-list')
+    login_url = 'sso/login'
     success_url = 'blog:list'
 
     def test_func(self):
