@@ -19,7 +19,7 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-
+    path('summernote/', include('django_summernote.urls')),  # WYSIWYG Editer
     path('api/', include('api.urls')),
     path('sso/', include('user.urls')),
     path('blog/', include('blog.urls')),
