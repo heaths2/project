@@ -8,36 +8,14 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
     {% load staticfiles %}
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'Main/img/favicon.ico' %}" />
-    <link rel="stylesheet" href="{% static 'Main/css/style.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/Login.css' %}" />
-    <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="{% static 'Main/images/icons/favicon.ico' %}" />
-    <!--===============================================================================================-->
-    <!-- <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css"> -->
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css"
-        href="{% static 'Main/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}" />
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static 'Main/vendor/animate/animate.css' %}" />
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static 'Main/vendor/select2/select2.min.css' %}" />
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static 'Main/vendor/perfect-scrollbar/perfect-scrollbar.css' %}" />
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static 'Main/css/util.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'Main/css/main.css' %}" />
-    <!--===============================================================================================-->
-    <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"> -->
-    <!--{% block styles %}{% endblock styles %} -->
+    <link rel="stylesheet" href="{% static 'css/BaseStyle.css' %}" />
+    {% block link %}
+    {% endblock link %}
 </head>
 
 <body>
-    <div id="container" class="container">
-
+    <div id="container" class="top-container">
         {% include 'header.html' %}
-
-        {% include 'nav.html' %}
 
         {% include 'section.html' %}
 
@@ -49,19 +27,8 @@
 
     </div>
 
-    <!-- {% block pagination %}
-        {% endblock pagination %} -->
-
-    <!--===============================================================================================-->
-    <script src="{% static 'Main/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
-    <!--===============================================================================================-->
-    <script src="{% static 'Main/vendor/bootstrap/js/popper.js' %}"></script>
-    <script src="{% static 'Main/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-    <!--===============================================================================================-->
-    <script src="{% static 'Main/vendor/select2/select2.min.js' %}"></script>
-    <!--===============================================================================================-->
-    <script src="{% static 'Main/js/main.js' %}"></script>
-
+    {% block script %}
+    {% endblock script %}
 </body>
 
 </html>
