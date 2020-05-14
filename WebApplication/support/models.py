@@ -31,6 +31,6 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
-        # db_table = 'project_support'
+        # db_table = 'g_support'
         # verbose_name = '필수값'
         # verbose_name_plural = '필수값'
