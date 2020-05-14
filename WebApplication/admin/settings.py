@@ -29,10 +29,10 @@ SECRET_KEY = 'drk0!v6kw3ty$493+_b0zhfi@ci$eh#art(!2hw^(uw6*6doq0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', '124.56.173.21', '192.168.0.119']
 # CIDR
 ALLOWED_CIDR_NETS = [
-    '192.168.100.0/24',
+    '192.168.0.0/24',
 ]
 
 # Application definition
@@ -72,6 +72,7 @@ INSTALLED_APPS += [
     # 'allauth.account',
 
     # Add App
+    'crm.apps.CrmConfig',
     'blog.apps.BlogConfig',
     'user.apps.UserConfig',
 ]
