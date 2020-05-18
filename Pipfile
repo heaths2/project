@@ -17,7 +17,7 @@ djangorestframework = "*"
 djangorestframework-simplejwt = "*"
 django-summernote = "*"
 django-crispy-forms = "*"
-django-betterforms = "*"
+django-multi-form-view = "*"
 
 [requires]
 python_version = "3.8"

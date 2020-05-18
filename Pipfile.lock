@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "2d065217c2d28137f2bc4befdbaf6f1706d2dbfb801e0ab7c0f4bea8bde0755d"
+            "sha256": "53feaa65a929d611e4e2bc9ee53026db9fbcedac5c3572e59ea3e4ef5962ae44"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -32,13 +32,6 @@
             "index": "pypi",
             "version": "==0.3.1"
         },
-        "django-betterforms": {
-            "hashes": [
-                "sha256:7d61ad6302793daba6f5f15fbb1dbe68785b6fe31a508df1da404814bc537acc"
-            ],
-            "index": "pypi",
-            "version": "==1.2"
-        },
         "django-crispy-forms": {
             "hashes": [
                 "sha256:ad943285508f0ed0e271d00399b9399c22b8795a4f969029bce0fd29522a8e2d",
@@ -46,6 +39,14 @@
             ],
             "index": "pypi",
             "version": "==1.9.1"
+        },
+        "django-multi-form-view": {
+            "hashes": [
+                "sha256:40bca9a6841392b10f9c029187f4063ae4f5493792a55d8b4ed4bfa299f608de",
+                "sha256:de3a73ec914a7c02cae523ef080eb6024deb319ba5f219d5d1a7091220fbf7f1"
+            ],
+            "index": "pypi",
+            "version": "==2.0.1"
         },
         "django-summernote": {
             "hashes": [
