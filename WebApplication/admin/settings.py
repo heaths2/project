@@ -29,7 +29,7 @@ SECRET_KEY = 'drk0!v6kw3ty$493+_b0zhfi@ci$eh#art(!2hw^(uw6*6doq0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', '124.56.173.21', '192.168.0.119']
+ALLOWED_HOSTS = ['*']
 # CIDR
 ALLOWED_CIDR_NETS = [
     '192.168.0.0/24',
@@ -53,6 +53,9 @@ INSTALLED_APPS += [
 
     # Humanize Add
     'django.contrib.humanize',
+
+    # django-formtools
+    'formtools',
 
     # Crispy Form
     'crispy_forms',
@@ -89,6 +92,10 @@ MIDDLEWARE = [
 # Add MIDDLEWARE
 MIDDLEWARE += [
     'allow_cidr.middleware.AllowCIDRMiddleware',
+    
+    # django-session-timeout
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
 ]
 
 ROOT_URLCONF = 'admin.urls'
@@ -145,10 +152,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-# Session Time Out
-SESSION_COOKIE_AGE = 300
-SESSION_SAVE_EVERY_REQUEST = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
@@ -261,6 +264,12 @@ LOGOUT_URL = '/sso/Login'
 
 LOGIN_REDIRECT_URL = '/blog/list'
 LOGOUT_REDIRECT_URL = '/sso/Login/'
+
+# Session Time Out
+SESSION_EXPIRE_SECONDS = 600
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
+SESSION_SAVE_EVERY_REQUEST = True
+SESSION_TIMEOUT_REDIRECT = 'sso/Login'
 
 # Summernote Config
 SUMMERNOTE_CONFIG = {
