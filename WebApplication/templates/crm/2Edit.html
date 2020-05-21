@@ -1,0 +1,207 @@
+{% extends "_base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block title %}CRM Create{% endblock title %}
+
+{% block Article %}
+<!-- Article area start-->
+<article class="article-section-area">
+    <div class="tab-pane fade show active" id="home">
+
+        <div class="container-article">
+            <div class="wrap-table">
+                <form class="post" method="POST" action="{% url 'crm:create' %}">
+                    {% csrf_token %}
+                    <h1 class="section-heading">고객사 정보</h1>
+                    <hr>
+                    {% include 'crm/Company.html' %}
+
+                    <h1 class="section-heading">고객 정보</h1>
+                    <hr>
+                    {% include 'crm/Customer.html' %}
+
+                    <h1>제품 정보</h1>
+
+                    <h1 class="section-heading">제품 정보</h1>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-sm">
+                            <table id="data-table-basic" class="table table-striped" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>호스트명</th>
+                                        <th>IP</th>
+                                        <th>제품명</th>
+                                        <th>제품 버전</th>
+                                        <th>모듈 버전</th>
+                                        <th>운영체제</th>
+                                        <th>운영체제 버전</th>
+                                        <th>웹서버</th>
+                                        <th>웹서버 버전</th>
+                                        <th>WAS 서버</th>
+                                        <th>WAS 서버 버전</th>
+                                        <th>DBMS 서버</th>
+                                        <th>DBMS 버전</th>
+                                        <th>비고</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>개발서버</td>
+                                        <td>127.0.0.1</td>
+                                        <td>NetClient</td>
+                                        <td>6.0</td>
+                                        <td>6.0.0</td>
+                                        <td>Linux</td>
+                                        <td>CentOS7 x64</td>
+                                        <td>Apache</td>
+                                        <td>Apache 2.4</td>
+                                        <td>Tomcat</td>
+                                        <td>Tomcat 8.5</td>
+                                        <td>Oracle</td>
+                                        <td>Oracle 11g</td>
+                                        <td>4any서버</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>제품명</th>
+                                        <th>제품 버전</th>
+                                        <th>모듈 버전</th>
+                                        <th>운영체제</th>
+                                        <th>운영체제 버전</th>
+                                        <th>웹서버</th>
+                                        <th>웹서버 버전</th>
+                                        <th>WAS 서버</th>
+                                        <th>WAS 서버 버전</th>
+                                        <th>DBMS 서버</th>
+                                        <th>DBMS 버전</th>
+                                        <th>비고</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h1>계약 정보</h1>
+                    <table id="data-table-basic" class="table table-striped" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>계약 일자</th>
+                                <th>담당영업</th>
+                                <th>라이선스 수량</th>
+                                <th>라이선스 기간</th>
+                                <th>점검 유형</th>
+                                <th>점검 기간</th>
+                                <th>비 고</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2019-01-01</td>
+                                <td>홍길동</td>
+                                <td>100</td>
+                                <td>2019-01-01 - 2020-12-31</td>
+                                <td>유상 지원</td>
+                                <td>2019-01-01 - 2020-12-31</td>
+                                <td>DB 이중화</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>계약 일자</th>
+                                <th>담당영업</th>
+                                <th>라이선스 수량</th>
+                                <th>라이선스 기간</th>
+                                <th>점검 유형</th>
+                                <th>점검 기간</th>
+                                <th>비 고</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <h1>프로젝트 이력</h1>
+                    <table id="data-table-basic" class="table table-striped" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>시작 일자</th>
+                                <th>종료 일자</th>
+                                <th>구축 담당자</th>
+                                <th>진행 상태</th>
+                                <th>진행률</th>
+                                <th>진행 내역</th>
+                                <th>비 고</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2019-01-01</td>
+                                <td>2019-01-01</td>
+                                <td>홍길동</td>
+                                <td>완료</td>
+                                <td>100%</td>
+                                <td>개발서버 구축 및 테스트 완료</td>
+                                <td>개발서버 논리적 2중화</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>시작 일자</th>
+                                <th>종료 일자</th>
+                                <th>구축 담당자</th>
+                                <th>진행 상태</th>
+                                <th>진행률</th>
+                                <th>진행 내역</th>
+                                <th>비 고</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <h1>기술지원 이력</h1>
+                    <table id="data-table-basic" class="table table-striped" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>시작 일자</th>
+                                <th>종료 일자</th>
+                                <th>엔지니어</th>
+                                <th>처리 상태</th>
+                                <th>지원 유형</th>
+                                <th>지원 형태</th>
+                                <th>지원 내역</th>
+                                <th>비 고</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2019-01-01</td>
+                                <td>2019-01-01</td>
+                                <td>홍길동</td>
+                                <td>완료</td>
+                                <td>100%</td>
+                                <td>유상지원</td>
+                                <td>원격지원</td>
+                                <td>속도 저하 현상</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>시작 일자</th>
+                                <th>종료 일자</th>
+                                <th>엔지니어</th>
+                                <th>처리 상태</th>
+                                <th>지원 유형</th>
+                                <th>지원 형태</th>
+                                <th>지원 내역</th>
+                                <th>비 고</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <button type="submit" class="btn btn-success">등록</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</article>
+<!-- Article area End-->
+{% endblock Article %}
