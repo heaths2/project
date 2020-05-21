@@ -140,12 +140,15 @@ table {
 }
 .navbar-light .navbar-brand {
     color: #fff;
+    font-weight: bold;
 }
 .navbar-light .navbar-nav .active>.nav-link {
     color: #fff;
+    font-weight: bold;
 }
 .navbar-light .navbar-nav .nav-link {
     color: #fff;
+    font-weight: bold;
 }
 /*----------------------------------------*/
 /*  03.  Nav default CSS                  */
@@ -165,12 +168,12 @@ table {
     min-height: 100vh;
     background: #fff;
   
-    display: -webkit-box;
+    /* display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
-    display: -ms-flexbox;
+    display: -ms-flexbox; */
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
     flex-wrap: wrap;
     padding: 33px 30px;
@@ -186,13 +189,20 @@ table {
     text-transform: uppercase;
     background-color: #00c292;
 }
-.table td, .table th {
-    padding: .75rem;
-    vertical-align: top;
-    border-top: 1px solid #dee2e6;
-    font-size: 18px;
-}
 
+
+.section-heading {
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 60px;
+}
+.section-content {
+    font-size: 18px;
+    font-weight: 450;    
+}
+.logo-img {
+    padding: 0;
+}
 /*----------------------------------------*/
 /*  06. Aside Default CSS                 */
 /*----------------------------------------*/
