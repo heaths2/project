@@ -127,7 +127,8 @@ DATABASES = {
         # 'HOST': '192.168.100.111',
         # 'PORT': '3306'
         'OPTIONS': {
-            'read_default_file': 'D:\Django\project\mariadb.cnf',
+            # 'read_default_file': 'D:\Django\project\mariadb.cnf',
+            'read_default_file': '/opt/project/mariadb.cnf',
         },
     }
 }
