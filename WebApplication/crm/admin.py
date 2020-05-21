@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Address, Company, Customer
+from .models import Address, Company, Customer, Contract, Product
 
 
 class AddressInline(admin.StackedInline):
@@ -26,3 +26,5 @@ class CompanyAdmin(admin.ModelAdmin):
 admin.site.register(Address)
 admin.site.register(Company, CompanyAdmin)
 admin.site.register(Customer)
+admin.site.register(Contract)
+admin.site.register(Product)
