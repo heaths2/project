@@ -4,38 +4,38 @@ from django.utils import timezone
 
 from support.models import BaseModel
 
-# class Address(BaseModel):
-#     address = models.CharField(_('주소'), blank=False, null=False, db_column='address', max_length=255)
 
-#     def __str__(self):
-#         return f'{ self.address }'
+class Address(BaseModel):
+    address = models.CharField(_('주소'), blank=False, null=False, db_column='address', max_length=255)
 
-#     class Meta:
-#         db_table = 'g_address'
-#         verbose_name = '주소'
-#         verbose_name_plural = '주소'
+    def __str__(self):
+        return f'{ self.address }'
+
+    class Meta:
+        db_table = 'g_address'
+        verbose_name = '주소'
+        verbose_name_plural = '주소'
 
 
 # 고객사 정보
 class Company(BaseModel):
     company = models.CharField(_('회사명'), unique=True, blank=False, null=False, db_column='company', max_length=64)
-    address = models.CharField(_('주소'), blank=False, null=False, db_column='address', max_length=255)
-    # address = models.ForeignKey(Address, on_delete=models.CASCADE, verbose_name='주소', related_name='addr', db_column='address')
+    address = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='Address', verbose_name='주소', db_column='address')
     corporate_registration_number = models.CharField(_('사업자등록번호'), unique=True, blank=True, null=True, db_column='corporate_registration_number', max_length=12)
     BUSINESS_CONDITIONS_CHOICES = (
+        (None, '업태 선택'),
         (0, '완료'),
         (1, '처리'),
         (2, '보류'),
     )
-    # business_conditions = models.SmallIntegerField(_('업태'), choices=BUSINESS_CONDITIONS_CHOICES, default=0, blank=False, null=False)
-    business_conditions = models.CharField(_('업태'), choices=BUSINESS_CONDITIONS_CHOICES, default=0, blank=False, null=False, max_length=255)
+    business_conditions = models.SmallIntegerField(_('업태'), choices=BUSINESS_CONDITIONS_CHOICES, default=None, blank=False, null=False)
     CATEGORY_OF_BUSINESS_CHOICES = (
+        (None, '업종 선택'),
         (0, '완료'),
         (1, '처리'),
         (2, '보류'),
     )
-    # category_of_business = models.SmallIntegerField(_('업종'), choices=CATEGORY_OF_BUSINESS_CHOICES, default=0, blank=False, null=False)
-    category_of_business = models.CharField(_('업종'), choices=CATEGORY_OF_BUSINESS_CHOICES, default=0, blank=False, null=False, max_length=255)
+    category_of_business = models.SmallIntegerField(_('업종'), choices=CATEGORY_OF_BUSINESS_CHOICES, default=None, blank=False, null=False)
 
     def __str__(self):
         return f'{ self.company }  { self.address } { self.corporate_registration_number } { self.business_conditions } { self.category_of_business }'
@@ -95,6 +95,7 @@ class Contract(BaseModel):
     contract_date = models.DateField(_('계약 일자'), db_column='contract_date', blank=False, null=False, default=timezone.now)
     salesman = models.CharField(_('담당영업'), db_column='salesman', blank=False, null=False, max_length=32)
     LICENSE_TYPE_CHOICES = (
+        (None, '라이선스 구분'),
         (0, '영구'),
         (1, '기간'),
         (2, '임시'),
@@ -104,6 +105,7 @@ class Contract(BaseModel):
     license_period_start = models.DateField(_('라이선스 시작 기간'), db_column='license_period_start', blank=False, null=False, default=timezone.now)
     license_period_end = models.DateField(_('라이선스 종료 기간'), db_column='license_period_end', blank=False, null=False, default=timezone.now)
     CONTRACT_TYPE_CHOICES = (
+        (None, '계약 구분'),
         (0, '유상'),
         (1, '무상'),
         (2, '장애'),
