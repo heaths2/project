@@ -9,15 +9,14 @@ from .models import Company, Customer, Product, Contract
 from .forms import CompanyForm, CustomerForm, ProductForm, ContractForm
 from .multiform import MultiFormsView
 
-
-class CRMCreateView(LoginRequiredMixin, CreateView):
-    # form_class = CompanyForm
-    # form_class1 = CompanyForm
-    # form_class2 = CustomerForm
-    # context_object_name = 'form'
-    template_name = 'crm/Edit.html'
-    login_url = 'sso/Login'
-    success_url = reverse_lazy('blog:list')
+# class CRMCreateView(LoginRequiredMixin, CreateView):
+#     # form_class = CompanyForm
+#     # form_class1 = CompanyForm
+#     # form_class2 = CustomerForm
+#     # context_object_name = 'form'
+#     template_name = 'crm/Edit.html'
+#     login_url = 'sso/Login'
+#     success_url = reverse_lazy('blog:list')
 
 #     def get(self, request, *args, **kwargs):
 #         super(CRMCreateView, self).get(request, *args, **kwargs)
@@ -48,15 +47,16 @@ class CRMListView(LoginRequiredMixin, ListView):
     login_url = 'sso/Login'
     resolve_url = 'user:Login'
 
-# class CRMCreateView(LoginRequiredMixin, MultiFormsView):
-#     template_name = 'crm/Edit.html'
-#     login_url = 'sso/Login'
-#     form_classes = {
-#         'company': CompanyForm,
-#         'customer': CustomerForm,
-#         'product': ProductForm,
-#         'contract': ContractForm
-#     }
 
-#     success_url = reverse_lazy('blog:list')
+class CRMCreateView(LoginRequiredMixin, MultiFormsView):
+    template_name = 'crm/Edit.html'
+    login_url = 'sso/Login'
+    form_classes = {
+        'company': CompanyForm,
+        'customer': CustomerForm,
+        'product': ProductForm,
+        'contract': ContractForm
+    }
+
+    success_url = reverse_lazy('blog:list')
 
