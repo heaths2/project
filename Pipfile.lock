@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "53feaa65a929d611e4e2bc9ee53026db9fbcedac5c3572e59ea3e4ef5962ae44"
+            "sha256": "cb75a07133f48aaafd106b69a405d8421e62613acfcbeebd879a65a35df730b7"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -40,13 +40,21 @@
             "index": "pypi",
             "version": "==1.9.1"
         },
-        "django-multi-form-view": {
+        "django-formtools": {
             "hashes": [
-                "sha256:40bca9a6841392b10f9c029187f4063ae4f5493792a55d8b4ed4bfa299f608de",
-                "sha256:de3a73ec914a7c02cae523ef080eb6024deb319ba5f219d5d1a7091220fbf7f1"
+                "sha256:304fa777b8ef9e0693ce7833f885cb89ba46b0e46fc23b01176900a93f46742f",
+                "sha256:c5272c03c1cd51b2375abf7397a199a3148a9fbbf2f100e186467a84025d13b2"
             ],
             "index": "pypi",
-            "version": "==2.0.1"
+            "version": "==2.2"
+        },
+        "django-session-timeout": {
+            "hashes": [
+                "sha256:648fe4ffa762f3bb62ce7a9ed1bbba8e37648158d555f18a880471982941084c",
+                "sha256:e01b2502d4b9995edb93be1a66f304d0314cecb4f671ddc26cb4525a07e56282"
+            ],
+            "index": "pypi",
+            "version": "==0.1.0"
         },
         "django-summernote": {
             "hashes": [
@@ -127,6 +135,13 @@
                 "sha256:c35965d010ce31b23eeb663ed3cc8c906275d6be1a34393a1d73a41febf4a048"
             ],
             "version": "==2020.1"
+        },
+        "six": {
+            "hashes": [
+                "sha256:236bdbdce46e6e6a3d61a337c0f8b763ca1e8717c03b369e87a7ec7ce1319c0a",
+                "sha256:8f3cd2e254d8f793e7f3d6d9df77b92252b52637291d0f0da013c76ea2724b6c"
+            ],
+            "version": "==1.14.0"
         }
     },
     "develop": {
