@@ -54,9 +54,6 @@ INSTALLED_APPS += [
     # Humanize Add
     'django.contrib.humanize',
 
-    # django-formtools
-    'formtools',
-
     # Crispy Form
     'crispy_forms',
 

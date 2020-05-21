@@ -5,8 +5,6 @@ from django.views.generic import (
     ListView, DetailView, DeleteView, CreateView, UpdateView
 )
 
-from formtools.wizard.views import WizardView
-
 from .models import Company, Customer, Product, Contract
 from .forms import CompanyForm, CustomerForm, ProductForm, ContractForm
 from .multiform import MultiFormsView
