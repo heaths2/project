@@ -100,7 +100,7 @@ class Contract(BaseModel):
         (1, '기간'),
         (2, '임시'),
     )
-    license_type = models.SmallIntegerField(_('라이선스 구분'), choices=LICENSE_TYPE_CHOICES, default=0, blank=False, null=False)
+    license_type = models.SmallIntegerField(_('라이선스 구분'), choices=LICENSE_TYPE_CHOICES, default=None, blank=False, null=False)
     licenses = models.SmallIntegerField(_('라이선스'), db_column='license', blank=False, null=False)
     license_period_start = models.DateField(_('라이선스 시작 기간'), db_column='license_period_start', blank=False, null=False, default=timezone.now)
     license_period_end = models.DateField(_('라이선스 종료 기간'), db_column='license_period_end', blank=False, null=False, default=timezone.now)
@@ -110,7 +110,7 @@ class Contract(BaseModel):
         (1, '무상'),
         (2, '장애'),
     )
-    contract_type = models.SmallIntegerField(_('계약 구분'), choices=CONTRACT_TYPE_CHOICES, default=0, blank=False, null=False)
+    contract_type = models.SmallIntegerField(_('계약 구분'), choices=CONTRACT_TYPE_CHOICES, default=None, blank=False, null=False)
     contract_period_start = models.DateField(_('계약 시작 기간'), db_column='contract_period_start', blank=False, null=False, default=timezone.now)
     contract_period_end = models.DateField(_('계약 종료 기간'), db_column='contract_period_end', blank=False, null=False, default=timezone.now)
     note = models.CharField(_('비  고'), blank=False, null=False, db_column='note', max_length=255)
