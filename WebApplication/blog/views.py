@@ -1,12 +1,13 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, resolve_url
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
     ListView, DetailView, DeleteView, CreateView, UpdateView
 )
 from rest_framework import viewsets, permissions
 
+from .forms import PostForm
 from .models import Post, Comment
 from .serializers import PostSerializer, CommentSerializer
 
@@ -19,17 +20,14 @@ class PostListView(LoginRequiredMixin, ListView):
     ordering = ['-created_at']
     # paginate_by = 10
     login_url = 'sso/Login'
+    resolve_url = 'user:Login'
 
     # print(queryset)
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(PostListView, self).get_context_data(**kwargs)
-    #     context['form'] = PostListView()
-    #     return context
-
 
 class PostDetailView(LoginRequiredMixin, DetailView):
-    template_name = 'blog/post_detail.html'
+    template_name = 'blog/DD.html'
+    # form_class = PostForm
     # queryset = Post.objects.filter(id__gt=1)
     login_url = 'sso/Login'
 
@@ -37,17 +35,24 @@ class PostDetailView(LoginRequiredMixin, DetailView):
         _id = self.kwargs.get("id")
         return get_object_or_404(Post, pk=_id)
 
+    def get_context_data(self, **kwargs):
+        # 생성된 context는 Template으로 전달됨.
+        context = super().get_context_data(**kwargs)
+        context['form'] = PostForm(self.request)
+        return context
+
 
 class PostCreateView(LoginRequiredMixin, CreateView):
-    model = Post
-    fields = ['author', 'title', 'content', 'image', 'files']
-    template_name = 'blog/post_edit.html'
+    form_class = PostForm
+    # model = Post
+    # fields = ['author', 'status', 'title', 'content', 'image', 'files']    
+    template_name = 'blog/Edit.html'
+
     login_url = 'sso/Login'
     success_url = reverse_lazy('blog:list')
 
     def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
+        return super(PostCreateView, self).form_valid(form)
 
     # def get_success_url(self):
     #     return '/'
@@ -59,10 +64,11 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     #     return False
 
 
-class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
-    fields = ['author', 'title', 'content', 'image', 'files']
-    template_name = 'blog/post_edit.html'
+    fields = ['author', 'status', 'title', 'content', 'image', 'files']
+    # form_class = 'PostForm'
+    template_name = 'blog/Edit.html'
     login_url = 'sso/login'
     success_url = reverse_lazy('blog:list')
 
@@ -70,12 +76,12 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-    # def get_object(self, pk):
-    #     pk = self.kwargs.get("pk)"
-    #     return get_object_or_404(Post, pk=pk)
+    def get_object(self):
+        _id = self.kwargs.get("id")
+        return get_object_or_404(Post, pk=_id)
 
 
-class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     # success_url = reverse_lazy('author-list')
     login_url = 'sso/login'
@@ -94,7 +100,7 @@ def post_list(request):
     return render(request, 'blog/post_list.html', {'posts': posts})
 
 
-class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     success_url = '/'
 

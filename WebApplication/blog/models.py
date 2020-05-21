@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django_summernote import models as SModels
 from django_summernote import fields as SFields
@@ -11,17 +12,18 @@ class Post(BaseModel):
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='작성자',
                                related_name='작성자', db_column='author', blank=False, null=False)
     STATUS_CHOICES = (
+        (None, '처리 상태'),
         (0, '완료'),
         (1, '처리'),
         (2, '보류'),
     )
-    status = models.SmallIntegerField(_('status'), choices=STATUS_CHOICES, default=0, blank=False, null=False)
+    status = models.SmallIntegerField(_('status'), choices=STATUS_CHOICES, default=None, blank=False, null=False)
     title = models.CharField(
         db_column='title', verbose_name='제목', max_length=255, blank=False, null=False)
-    # content = models.TextField(
-    #     db_column='content', verbose_name='내용', blank=True, null=True)
-    content = SFields.SummernoteTextField(
+    content = models.TextField(
         db_column='content', verbose_name='내용', blank=True, null=True)
+    # content = SFields.SummernoteTextField(
+    #     db_column='content', verbose_name='내용', blank=True, null=True)
     # 저장경로, MEDIA_ROOT/blog/2017/05/10/xxxx.jpg 경로에 저장
     # DB필드, 'MEDIA_URL/blog/2017/05/10/xxxx.jpg' 문자열 저장
     # image = models.ImageField(db_column='image', verbose_name='이미지', blank=True, null=True, upload_to='blog/image/%Y%m%d/%H%M%S')
@@ -32,7 +34,7 @@ class Post(BaseModel):
                              blank=True, null=True, upload_to='blog/file/%Y%m%d/')
 
     def __str__(self):
-        return self.title
+        return "{0}".format(self.title)
 
     def get_absolute_url(self):
         return reverse('blog:list', kwargs={'pk': self.pk})

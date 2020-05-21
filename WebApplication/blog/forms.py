@@ -16,52 +16,22 @@ class PostForm(forms.ModelForm):
     #                                 },
     #                                 )
 
+    # def __init__(self, Post, *args, **kwargs):
+    #     self.post = Post
+    #     super(PostForm, self).__init__(*args, **kwargs)
+    #     self.fields['author'] = forms.CharField(label='작성자', initial=post.author, required=True)
+    #     self.fields['status'] = forms.SmallIntegerField(label='처리상태', initial=post.status, required=True)
+    #     self.fields['title'] = forms.CharField(label='제목', initial=post.title, required=True)
+    #     self.fields['content'] = forms.CharField(label='내용', initial=post.content, required=True)
+    #     self.fields['image'] = forms.ImageField(label='이미지', initial=post.image, required=True)
+    #     self.fields['files'] = forms.FileField(label='파일', initial=post.files, required=True)
+    # def __init__(self, *args, **kwargs):
+    #     self.request = kwargs.pop('request', None)
+    #     super(PostForm, self).__init__(*args, **kwargs)
+
     class Meta:
         model = Post
-        fields = [
-            'author', 'title', 'content', 'image', 'files'
-        ]
-        labels = {
-            'author': '작성자',
-            'title': '제목',
-            'content': '내용',
-            'image': '이미지',
-            'files': '파일',
-        }
-        error_messages = {
-            'author': {
-                'required': _('작성자를 입력하시오.'),
-            },
-            'title': {
-                'required': _('이름을 입력하시오.'),
-            },
-            # 'content': {
-            #     'required': _('내용를 입력하시오.'),
-            # },
-            'image': {
-                'required': _('성별을 입력하시오.'),
-            },
-            'files': {
-                'required': _('비밀번호를 입력하시오.'),
-            },
-        }
-        widgets = {
-            'author': forms.EmailInput(attrs={
-                'class': 'form-control', 'name': 'author', 'placeholder': 'Author',
-            }),
-            'title': forms.TextInput(attrs={
-                'class': 'form-control', 'name': 'title', 'placeholder': 'Title',
-            }),
-            'content': SummernoteWidget(attrs={
-                'class': 'form-control', 'name': 'content', 'placeholder': 'content',
-            }),
-            'image': forms.Select(attrs={
-                'class': 'form-control', 'name': 'image', 'placeholder': 'Image',
-            }),
-            'files': forms.PasswordInput(attrs={
-                'class': 'form-control', 'name': 'files', 'placeholder': 'Files',
-            }),
-        }
+        fields = ['author', 'status', 'title', 'content', 'image', 'files']
 
 
 class CommentForm(forms.ModelForm):
@@ -92,3 +62,4 @@ class CommentForm(forms.ModelForm):
                 'class': 'form-control', 'name': 'content', 'placeholder': 'content', 'required': 'True',
             }),
         }
+        

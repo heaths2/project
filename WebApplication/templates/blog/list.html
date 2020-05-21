@@ -6,20 +6,19 @@
 {% block link %}
 <!--------------------------------------------- Data Table CDN --------------------------------------------->
 <link rel="stylesheet" type="text/css" href="{% static 'css/DataTables/datatables.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/DataTables/dataTables.bootstrap4.min.css' %}" />
 {% endblock link %}
 {% block Article %}
 <!-- Article area start-->
 <article class="article-section-area">
     <div class="tab-pane fade show active" id="home">
 
-        <div class="container-article">
-            <input type="button" value="글쓰기">
-            <div class="button"><a class="btn btn-primary  btn-sm btn-block" href="{% url 'blog:create' %}">글쓰기</a>
 
-            </div>
-            <hr>
+        <div class="container-article">
             <div class="wrap-table">
-                <table id="data-table-basic" class="table table-striped" style="width:100%">
+                <div class="single-button"><a class="btn btn-primary float-right" href="{% url 'blog:create' %}">글쓰기</a>
+                </div>
+                <table id="" class="display nowrap table table-striped" style="width:100%">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -38,7 +37,7 @@
                             <td>{{ post.modified_at|date:"Y-m-d" }}</td>
                             <td><a href="{% url 'blog:detail' post.id %}">{{ post.title }}</a></td>
                             <td>{{ post.author }}</td>
-                            <td>완료</td>
+                            <td>{{ post.status }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -66,4 +65,6 @@
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{% static 'js/DataTables/datatables.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/DataTables/datatablesQuery.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/DataTables/dataTables.bootstrap4.min.js' %}"></script>
+
 {% endblock script %}
