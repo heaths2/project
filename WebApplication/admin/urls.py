@@ -15,6 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf.urls import (
+    handler400, handler403, handler404, handler500
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -22,5 +25,11 @@ urlpatterns = [
     path('summernote/', include('django_summernote.urls')),  # WYSIWYG Editer
     path('api/', include('api.urls')),
     path('sso/', include('user.urls')),
+    path('crm/', include('crm.urls')),
     path('blog/', include('blog.urls')),
 ]
+
+handler400 = 'Bad Request'
+handler403 = 'Forbidden'
+handler404 = 'Not Found'
+handler500 = 'Internal Server Error'
