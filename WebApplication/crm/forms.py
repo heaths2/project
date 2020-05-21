@@ -92,7 +92,7 @@ class CustomerForm(forms.ModelForm):
         error_messages={'required': '전화번호를 입력하시오.'},
     )
     cellphone = forms.CharField(label='휴대폰',
-        widget=forms.Select(attrs={'class': 'form-control', 'name': 'cellphone', 'placeholder': '휴대폰', 'type': 'text', }),
+        widget=forms.TextInput(attrs={'class': 'form-control', 'name': 'cellphone', 'placeholder': '휴대폰', 'type': 'text', }),
         required=True,
         error_messages={'required': '휴대폰를 선택하시오.'},
     )
@@ -102,7 +102,7 @@ class CustomerForm(forms.ModelForm):
         error_messages={'required': '이메일을 입력하시오.'},
     )
     note = forms.CharField(label='비  고',
-        widget=forms.Select(attrs={'class': 'form-control', 'name': 'note', 'placeholder': '비  고', 'type': 'text', }),
+        widget=forms.TextInput(attrs={'class': 'form-control', 'name': 'note', 'placeholder': '비  고', 'type': 'text', }),
         required=True,
         error_messages={'required': '비  고를 선택하시오.'},
     )    
