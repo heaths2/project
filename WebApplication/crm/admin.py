@@ -4,7 +4,7 @@ from .models import Address, Company, Customer, Contract, Product
 
 
 class AddressInline(admin.StackedInline):
-    model = Company  # 어느 모델을 가져올 것인지
+    model = Address  # 어느 모델을 가져올 것인지
     extra = 1  # 여분 작성 항목은 몇개를 기본으로 표시할 것인지
 
 
@@ -20,7 +20,7 @@ class CompanyAdmin(admin.ModelAdmin):
             'fields': ['address']
         })
     ]
-    # inlines = [AddressInline]
+    inlines = [AddressInline]
 
 
 admin.site.register(Address)
