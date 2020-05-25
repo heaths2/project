@@ -1,0 +1,26 @@
+{% extends "_base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block title %}Post Edit{% endblock title %}
+
+{% block Article %}
+<!-- Article area start-->
+<article class="article-section-area">
+    <div class="tab-pane fade show active" id="home">
+
+        <div class="container-article">
+            <div class="wrap-table">
+                <form class="post" method="POST" action="{% url 'notice:edit' post.id %}">
+                    {% csrf_token %}
+                    <h1 class="section-heading">글쓰기</h1>
+                    <hr>
+                    {{ form | crispy }}
+                    <button type="submit" class="btn btn-success">수정</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</article>
+<!-- Article area End-->
+{% endblock Article %}

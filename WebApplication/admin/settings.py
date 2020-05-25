@@ -72,8 +72,9 @@ INSTALLED_APPS += [
     # 'allauth.account',
 
     # Add App
-    'crm.apps.CrmConfig',
     'blog.apps.BlogConfig',
+    'crm.apps.CrmConfig',
+    'notice.apps.NoticeConfig',
     'user.apps.UserConfig',
 ]
 
@@ -127,8 +128,8 @@ DATABASES = {
         # 'HOST': '192.168.100.111',
         # 'PORT': '3306'
         'OPTIONS': {
-            # 'read_default_file': 'D:\Django\project\mariadb.cnf',
-            'read_default_file': '/opt/project/mariadb.cnf',
+            'read_default_file': 'D:\Django\project\mariadb.cnf',
+            # 'read_default_file': '/opt/project/mariadb.cnf',
         },
     }
 }

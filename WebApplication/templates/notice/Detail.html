@@ -1,0 +1,31 @@
+{% extends "_base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block title %}Post Detail{% endblock title %}
+
+{% block Article %}
+<!-- Article area start-->
+<article class="article-section-area">
+    <div class="tab-pane fade show active" id="home">
+
+        <div class="container-article">
+
+            <div class="wrap-table">
+                <div class="single-button"><a class="btn btn-primary" href="{% url 'notice:edit' post.id %}">글수정</a>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 mx-auto">
+                        <input type="text" placeholder="{{ object.title }}"
+                            class="section-heading textinput textInput form-control">
+                        <hr>
+                        <textarea name="content" cols="20" rows="10"
+                            class="section-content textarea form-control">{{ object.content }}</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+<!-- Article area End-->
+{% endblock Article %}
