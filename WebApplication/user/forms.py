@@ -123,6 +123,13 @@ class RegisterForm(forms.ModelForm):
 
 
 class LoginForm(forms.ModelForm):
+    username = forms.CharField(
+        label='이름',
+        widget=forms.TextInput(attrs={'class': 'form-control', 'name': 'username', 'placeholder': '이름'}),
+        # input_formats=['%Y/%m/%d %h:%m'],
+        required=False,
+        error_messages={'required': '내용을 입력하시오.'},
+    )
 
     class Meta:
         model = User
