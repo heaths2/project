@@ -56,8 +56,9 @@ class LogoutView(auth_views.LogoutView):
 
     def get(self, request, *args, **kwargs):
         if request.session['user']:
+            print(request.session[sesskey])
+            del request.session[sesskey]
             logout(request)
-            del (request.session['user'])
 
         return super(LogoutView, self).get(request, *args, **kwargs)
 
