@@ -15,14 +15,14 @@
                 <div class="collapse navbar-collapse" id="navbarColor03">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="{% url 'blog:list' %}">대시보드<span
+                            <a class="nav-link" href="{% url 'notice:list' %}">공지사항<span
                                     class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'crm:create' %}">이력관리</a>
+                            <a class="nav-link" href="{% url 'crm:create' %}">고객관리</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">고객관리</a>
+                            <a class="nav-link" href="{% url 'blog:list' %}">기술지원</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">작업중</a>
@@ -33,9 +33,12 @@
                         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                     </form>
                     <ul>
+                        {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'user:Login' %}">Logout</a>
+                            <a class="btn btn-info btn-sm active" href="{% url 'user:Logout' %}">로그아웃</a>
                         </li>
+                        {% else %}
+                        {% endif %}
                     </ul>
                 </div>
             </nav>
@@ -43,13 +46,13 @@
         <div class="group-nav-list">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="{% url 'blog:list' %}">기술지원</a>
+                    <a class="nav-link active" data-toggle="tab" href="{% url 'blog:list' %}">기술이력</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#profile">Profile</a>
+                    <a class="nav-link" data-toggle="tab" href="#">작업중</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
+                    <a class="nav-link" data-toggle="tab" href="#">작업중</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
