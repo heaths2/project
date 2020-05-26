@@ -30,13 +30,14 @@ class RegisterForm(forms.ModelForm):
     class Meta:
         model = User
         fields = [
-            'email', 'username', 'phone', 'date_of_birth', 'gender', 'password',
+            'email', 'username', 'phone', 'date_of_birth', 'gender', 'department', 'password',
         ]
         labels = {
             'email': '이메일',
             'username': '이름',
             'phone': '휴대폰',
             'gender': '성별',
+            'department': '부서',
             'password': '비밀번호',
         }
         error_messages = {
@@ -51,6 +52,9 @@ class RegisterForm(forms.ModelForm):
             },
             'gender': {
                 'required': _('성별을 입력하시오.'),
+            },
+            'department': {
+                'required': _('부서를 입력하시오.'),
             },
             'password': {
                 'required': _('비밀번호를 입력하시오.'),
@@ -67,7 +71,10 @@ class RegisterForm(forms.ModelForm):
                 'class': 'form-control', 'name': 'phone', 'placeholder': '연락처 : 010-1234-5678', 'type': 'tel',
             }),
             'gender': forms.Select(attrs={
-                'class': 'form-control', 'name': 'gender', 'placeholder': 'Gender',
+                'class': 'form-control', 'name': 'gender', 'placeholder': '성별',
+            }),
+            'department': forms.Select(attrs={
+                'class': 'form-control', 'name': 'department', 'placeholder': '부서',
             }),
             'password': forms.PasswordInput(attrs={
                 'class': 'form-control', 'name': 'password', 'placeholder': 'Password',

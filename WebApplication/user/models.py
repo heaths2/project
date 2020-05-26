@@ -83,12 +83,21 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_of_birth = models.DateField(verbose_name='생년월일', db_column='date_of_birth', default='1999-01-01', blank=False, null=False)
 
     GENDER_CHOICES = (
+        (None, '성별 선택'),
         (0, '선택하지 않음'),
         (1, '남성'),
         (2, '여성'),
     )
+    gender = models.SmallIntegerField(_('gender'), choices=GENDER_CHOICES, default=None, blank=False, null=False)
 
-    gender = models.SmallIntegerField(choices=GENDER_CHOICES, default=0)
+    DEPARTMENT_CHOICES = (
+        (None, '부서 선택'),
+        (0, '경영지원'),
+        (1, '영업'),
+        (2, '1팀'),
+        (3, '2팀'),
+    )
+    department = models.SmallIntegerField(_('department'), choices=DEPARTMENT_CHOICES, default=None, blank=False, null=False)
 
     date_joined = models.DateTimeField(verbose_name='가입일', db_column='date_joined', auto_now_add=True, blank=False, null=False)
     last_login = models.DateTimeField(verbose_name='마지막 로그인', db_column='last_login', auto_now=True, blank=False, null=False)
