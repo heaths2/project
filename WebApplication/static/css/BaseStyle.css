@@ -150,6 +150,18 @@ table {
     color: #fff;
     font-weight: bold;
 }
+.btn-info {
+    margin: auto 30px;
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+.btn-primary {
+    margin: 30px auto;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
 /*----------------------------------------*/
 /*  03.  Nav default CSS                  */
 /*----------------------------------------*/
