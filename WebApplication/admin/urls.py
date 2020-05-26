@@ -27,6 +27,7 @@ urlpatterns = [
     path('sso/', include('user.urls')),
     path('crm/', include('crm.urls')),
     path('blog/', include('blog.urls')),
+    path('notice/', include('notice.urls')),
 ]
 
 handler400 = 'Bad Request'
