@@ -19,7 +19,7 @@ from .models import User
 class RegisterView(CreateView):
     form_class = RegisterForm
     template_name = 'account/Register.html'
-    success_url = '/account/Login'
+    success_url = '/sso/Login'
 
 # def AccountLoginView(request):
 #     if request.method == 'POST':
