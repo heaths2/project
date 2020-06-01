@@ -1,29 +1,45 @@
-{% extends "sso_base.html" %}
+{% extends "_base.html" %}
+{% load staticfiles %}
 
 {% block title %}
 회원가입
 {% endblock title %}
 
-{% block content %}
 
-<form class="box" method="POST" action="{% url 'user:SignUp' %}">
-    {% csrf_token %}
-    <h1>회원가입</h1>
-    {{ form.email }}
-    {{ form.email.errors|striptags }}
-    {{ form.username }}
-    {{ form.username.errors|striptags }}
-    {{ form.phone }}
-    {{ form.phone.errors|striptags }}
-    {{ form.date_of_birth }}
-    {{ form.date_of_birth.errors|striptags }}
-    {{ form.gender }}
-    {{ form.gender.errors|striptags }}
-    {{ form.password }}
-    {{ form.password.errors|striptags }}
-    {{ form.password2 }}
-    {{ form.password2.errors|striptags }}
-    <button type="submit" class="btn btn-success">가입하기</button>
-</form>
+{% block link %}
 
-{% endblock content %}
+<link rel="stylesheet" href="{% static 'css/Auth.css' %}" />
+
+{% endblock link %}
+
+{% block Article %}
+
+<article class="article-section-area">
+    <div class="tab-pane fade show active">
+        <div class="container-article">
+            <div class="wrap-login">
+                <form class="auth-container" method="POST" action="{% url 'user:SignUp' %}">
+                    {% csrf_token %}
+                    <h1>회원가입</h1>
+                    {{ form.email }}
+                    {{ form.email.errors|striptags }}
+                    {{ form.username }}
+                    {{ form.username.errors|striptags }}
+                    {{ form.phone }}
+                    {{ form.phone.errors|striptags }}
+                    {{ form.date_of_birth }}
+                    {{ form.date_of_birth.errors|striptags }}
+                    {{ form.gender }}
+                    {{ form.gender.errors|striptags }}
+                    {{ form.department }}
+                    {{ form.password }}
+                    {{ form.password.errors|striptags }}
+                    {{ form.password2 }}
+                    {{ form.password2.errors|striptags }}
+                    <button type="submit" class="btn btn-success">가입하기</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</article>
+{% endblock Article %}

@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% load staticfiles %}
 
-{% block title %}Post Create{% endblock title %}
+{% block title %}Post Detail{% endblock title %}
 
 {% block Article %}
 <!-- Article area start-->
@@ -11,12 +11,12 @@
 
         <div class="container-article">
             <div class="wrap-table">
-                <form class="post" method="POST" action="{% url 'blog:edit' post.id %}">
+                <form class="post" method="POST" action="{% url 'blog:delete' post.id %}">
                     {% csrf_token %}
-                    <h1 class="section-heading">글수정</h1>
+                    <h1 class="section-heading">글삭제</h1>
                     <hr>
-                    {{ form | crispy }}
-                    <button type="submit" class="btn btn-success">수정</button>
+                    {{ form.title }}
+                    <button type="submit" class="btn btn-success">삭제</button>
                 </form>
             </div>
         </div>

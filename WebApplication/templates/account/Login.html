@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% load staticfiles %}
 
 {% block title %}
 로그인
@@ -7,14 +8,12 @@
 
 {% block link %}
 
-{% load staticfiles %}
 <link rel="stylesheet" href="{% static 'css/Auth.css' %}" />
 
 {% endblock link %}
 
 {% block Article %}
 
-{{ form.is_authenticated }}
 <article class="article-section-area">
     <div class="tab-pane fade show active">
         <div class="container-article">
