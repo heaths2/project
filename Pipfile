@@ -18,6 +18,7 @@ djangorestframework-simplejwt = "*"
 django-summernote = "*"
 django-crispy-forms = "*"
 django-session-timeout = "*"
+django-ckeditor = "*"
 
 [requires]
 python_version = "3.8"
