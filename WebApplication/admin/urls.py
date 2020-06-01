@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf import settings
+from django.conf.urls.static import static
 from django.conf.urls import (
     handler400, handler403, handler404, handler500
 )
@@ -22,13 +24,15 @@ from django.conf.urls import (
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('summernote/', include('django_summernote.urls')),  # WYSIWYG Editer
     path('api/', include('api.urls')),
     path('sso/', include('user.urls')),
     path('crm/', include('crm.urls')),
     path('blog/', include('blog.urls')),
     path('notice/', include('notice.urls')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler400 = 'Bad Request'
 handler403 = 'Forbidden'
