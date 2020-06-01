@@ -150,13 +150,13 @@ table {
     color: #fff;
     font-weight: bold;
 }
-.btn-info {
+.btn .btn-info .btn-sm .active {
     margin: auto 30px;
     color: #fff;
     background-color: #17a2b8;
     border-color: #17a2b8;
 }
-.btn-primary {
+.btn .btn-primary .float-right {
     margin: 30px auto;
     color: #fff;
     background-color: #007bff;
