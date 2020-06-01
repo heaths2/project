@@ -2,6 +2,8 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from django_summernote.widgets import SummernoteWidget
 from django_summernote import fields as SFields
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 
 from .models import Post
 
@@ -21,18 +23,31 @@ class PostForm(forms.ModelForm):
         required=True,
         error_messages={'required': '내용을 입력하시오.'},
     )
-    # def __init__(self, Post, *args, **kwargs):
-    #     self.post = Post
-    #     super(PostForm, self).__init__(*args, **kwargs)
-    #     self.fields['author'] = forms.CharField(label='작성자', initial=post.author, required=True)
-    #     self.fields['status'] = forms.SmallIntegerField(label='처리상태', initial=post.status, required=True)
-    #     self.fields['title'] = forms.CharField(label='제목', initial=post.title, required=True)
-    #     self.fields['content'] = forms.CharField(label='내용', initial=post.content, required=True)
-    #     self.fields['image'] = forms.ImageField(label='이미지', initial=post.image, required=True)
-    #     self.fields['files'] = forms.FileField(label='파일', initial=post.files, required=True)
-    # def __init__(self, *args, **kwargs):
-    #     self.request = kwargs.pop('request', None)
-    #     super(PostForm, self).__init__(*args, **kwargs)
+    image = forms.ImageField(
+        label='이미지',
+        initial=None,
+        widget=forms.FileInput(attrs={'class': 'form-control-file', 'name': 'image', 'placeholder': '이미지', 'type': 'file'}),
+        required=True,
+        error_messages={'required': '이미지를 업로드하시오.'},
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(PostForm, self).__init__(*args, **kwargs)
+        self.fields['author'].widget.attrs.update({'class': 'form-control'})
+        self.fields['title'].widget.attrs.update({'class': 'form-control'})
+        self.fields['content'].widget.attrs.update({'class': 'form-control'})
+        # self.fields['image'].widget.attrs.update({'class': 'form-control', 'type': 'file'})
+        # self.fields['files'].widget.attrs.update({'class': 'form-control'})
+        # self.helper = FormHelper()
+        # self.helper.form_tag = False
+        # self.helper.disable_csrf = True
+        # self.helper.layout = Layout(
+        #     'title',
+        #     'content',
+        #     'image',
+        #     HTML("""{% if form.image.value %}<img class="img-responsive" src="{{ MEDIA_URL }}{{ form.image.value }}">{% endif %}""",),
+        #     'flag_featured',
+        # )        
 
     class Meta:
         model = Post
