@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, resolve_url
+from django.http.response import HttpResponseForbidden
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
-    ListView, DetailView, DeleteView, CreateView, UpdateView
+    ListView, DetailView, DeleteView, CreateView, UpdateView, TemplateView
 )
 
 from .models import Company, Customer, Product, Contract
@@ -46,6 +47,7 @@ class CRMListView(LoginRequiredMixin, ListView):
     # paginate_by = 10
     login_url = 'sso/Login'
     resolve_url = 'user:Login'
+    success_url = reverse_lazy('crm:list')
 
 
 class CRMCreateView(LoginRequiredMixin, MultiFormsView):
@@ -58,5 +60,21 @@ class CRMCreateView(LoginRequiredMixin, MultiFormsView):
         'contract': ContractForm
     }
 
-    success_url = reverse_lazy('blog:list')
+    success_urls = {
+        'company': reverse_lazy('crm:list'),
+        'customer': reverse_lazy('crm:list'),
+        'product': reverse_lazy('crm:list'),
+        'contract': reverse_lazy('crm:list'),
+    }
 
+    # def company_form_valid(self, form):
+    #     'company form processing goes in here'
+
+    # def customer_form_valid(self, form):
+    #     'customer form processing goes in here'
+
+    # def product_form_valid(self, form):
+    #     'product form processing goes in here'
+
+    # def contract_form_valid(self, form):
+    #     'contract form processing goes in here'        
