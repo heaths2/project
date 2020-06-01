@@ -150,17 +150,24 @@ table {
     color: #fff;
     font-weight: bold;
 }
-.btn .btn-info .btn-sm .active {
-    margin: auto 30px;
+.btn-info:not(:disabled):not(.disabled).active, .btn-info:not(:disabled):not(.disabled):active, .show>.btn-info.dropdown-toggle {
     color: #fff;
-    background-color: #17a2b8;
-    border-color: #17a2b8;
+    background-color: #ffa500;
+    border: 1px solid #ffa500;
+    border-radius: 2px;
+    margin: auto 30px;
+    font-size: 13px;
+    font-weight: 700;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
 }
-.btn .btn-primary .float-right {
-    margin: 30px auto;
+.btn-primary {
     color: #fff;
     background-color: #007bff;
     border-color: #007bff;
+    margin: 30px auto;
 }
 /*----------------------------------------*/
 /*  03.  Nav default CSS                  */
