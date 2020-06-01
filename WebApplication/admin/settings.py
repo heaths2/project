@@ -57,8 +57,10 @@ INSTALLED_APPS += [
     # Crispy Form
     'crispy_forms',
 
-    # Summernote
-    'django_summernote',
+    # WYSIWYG Editer
+    'ckeditor',  # CKeditor
+    'ckeditor_uploader',
+    'django_summernote',  # Summernote
 
     # Django REST framewok
     'rest_framework',
@@ -78,6 +80,9 @@ INSTALLED_APPS += [
     'user.apps.UserConfig',
 ]
 
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -92,7 +97,6 @@ MIDDLEWARE += [
     'allow_cidr.middleware.AllowCIDRMiddleware',
     
     # django-session-timeout
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'django_session_timeout.middleware.SessionTimeoutMiddleware',
 ]
 
@@ -128,8 +132,8 @@ DATABASES = {
         # 'HOST': '192.168.100.111',
         # 'PORT': '3306'
         'OPTIONS': {
-            'read_default_file': 'D:\Django\project\mariadb.cnf',
-            # 'read_default_file': '/opt/project/mariadb.cnf',
+            # 'read_default_file': 'D:\Django\project\mariadb.cnf',
+            'read_default_file': '/opt/project/mariadb.cnf',
         },
     }
 }
@@ -188,7 +192,7 @@ MEDIA_URL = '/media/'  # 항상 / 로 끝나도록 설정
 # MEDIA_URL = 'http://static.myservice.com/media/' 다른 서버로 media 파일 복사시
 
 # 업로드된 파일을 저장할 디렉토리 경로
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, '/static/media')
 
 # DRF 사용 권한 정책 설정
 REST_FRAMEWORK = {
@@ -271,7 +275,7 @@ LOGOUT_REDIRECT_URL = '/sso/Login/'
 SESSION_EXPIRE_SECONDS = 600
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
 SESSION_SAVE_EVERY_REQUEST = True
-SESSION_TIMEOUT_REDIRECT = 'sso/Login'
+SESSION_TIMEOUT_REDIRECT = ''
 
 # Summernote Config
 SUMMERNOTE_CONFIG = {
@@ -284,4 +288,28 @@ SUMMERNOTE_CONFIG = {
         # 'toolbar': ['bold', 'italic', 'underline'],
     },
     'disable_attachment': True,
+}
+
+# logging
+# import os
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+            'propagate': False,
+        },
+    },
 }
