@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
     ListView, DetailView, DeleteView, CreateView, UpdateView
@@ -22,6 +22,7 @@ class PostListView(LoginRequiredMixin, ListView):
 class PostDetailView(LoginRequiredMixin, DetailView):
     template_name = 'notice/Detail.html'
     # form_class = PostForm
+    # context_object_name = 'form'
     # queryset = Post.objects.filter(id__gt=1)
     login_url = 'sso/Login'
 
@@ -39,7 +40,6 @@ class PostDetailView(LoginRequiredMixin, DetailView):
 class PostCreateView(LoginRequiredMixin, CreateView):
     form_class = PostForm
     template_name = 'notice/Create.html'
-
     login_url = 'sso/Login'
     success_url = reverse_lazy('notice:list')
 
@@ -66,3 +66,15 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
 
     # def get_object(self):
     #     return self.request.user
+
+
+class PostDeleteView(LoginRequiredMixin, DeleteView):
+    template_name = 'notice/Confirm_Delete.html'
+    # form_class = PostForm
+
+    def get_object(self):
+        _id = self.kwargs.get("id")
+        return get_object_or_404(Post, pk=_id)
+
+    def get_success_url(self):
+        return reverse('notice:list')
