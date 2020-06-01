@@ -1,37 +1,39 @@
 from django import forms
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
-from django_summernote import fields as SFields
 from django_summernote.widgets import SummernoteWidget
+from django_summernote import fields as SFields
 
 from .models import Post, Comment
 
 
 class PostForm(forms.ModelForm):
-    # content = SFields.SummernoteTextFormField(label='내용',
-    #                                 # input_formats=['%Y/%m/%d %h:%m'],
-    #                                 required=True,
-    #                                 error_messages={
-    #                                     'required': '내용을 입력하시오.'
-    #                                 },
-    #                                 )
+    # author = forms.CharField(
+    #     label='작성자',
+    #     widget=forms.Select(attrs={'class': 'form-control', 'name': 'author', 'placeholder': '작성자', 'type': 'text'}),
+    #     required=True,
+    #     error_messages={'required': '작성자를 입력하시오.'},
+    # )
 
-    # def __init__(self, Post, *args, **kwargs):
-    #     self.post = Post
-    #     super(PostForm, self).__init__(*args, **kwargs)
-    #     self.fields['author'] = forms.CharField(label='작성자', initial=post.author, required=True)
-    #     self.fields['status'] = forms.SmallIntegerField(label='처리상태', initial=post.status, required=True)
-    #     self.fields['title'] = forms.CharField(label='제목', initial=post.title, required=True)
-    #     self.fields['content'] = forms.CharField(label='내용', initial=post.content, required=True)
-    #     self.fields['image'] = forms.ImageField(label='이미지', initial=post.image, required=True)
-    #     self.fields['files'] = forms.FileField(label='파일', initial=post.files, required=True)
-    # def __init__(self, *args, **kwargs):
-    #     self.request = kwargs.pop('request', None)
-    #     super(PostForm, self).__init__(*args, **kwargs)
+    # DEPARTMENT_CHOICES = (
+    #     (None, '부서 선택'),
+    #     (0, '경영지원'),
+    #     (1, '영업'),
+    #     (2, '1팀'),
+    #     (3, '2팀'),
+    # )    
+    # department = forms.ChoiceField(
+    #     choices=DEPARTMENT_CHOICES,
+    #     initial={'department': '부서 선택'},
+    #     label='부서',
+    #     widget=forms.Select(attrs={'class': 'form-control', 'name': 'department', 'placeholder': '부서', 'type': 'text'}),
+    #     required=False,
+    #     error_messages={'required': '부서를 선택하시오.'},
+    # )    
 
     class Meta:
         model = Post
-        fields = ['author', 'status', 'title', 'content', 'image', 'files']
+        fields = ['author', 'department', 'status', 'title', 'content', 'image', 'files']
 
 
 class CommentForm(forms.ModelForm):
