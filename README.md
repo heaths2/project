@@ -5,3 +5,5 @@
 ✔ Python Project
 ✔ Django Project
 ```
+✔ Django Project
+```
