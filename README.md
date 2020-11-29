@@ -4,6 +4,7 @@
 ```    
 ✔ Python Project
 ✔ Django Project
+✔ React Project
 ```
-✔ Django Project
+✔ Full Stack Project
 ```
